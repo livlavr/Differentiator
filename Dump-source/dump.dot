@@ -1,0 +1,8 @@
+digraph tree{
+splines=ortho;
+rankdir=HR;
+nodesep=0.4;
+node [shape=record, fontname="Arial"];
+edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
+P0x132605fc0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x132605fc0 ] | Parent = [ 0x0 ] | Number of kids = 0 |[ + ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+}

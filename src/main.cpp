@@ -1,8 +1,13 @@
 #include <stdio.h>
 
-#include "diff.h"
+#include "tree_specializations.h"
+#include "diff_definitions.h"
+#include "dump_specializations.h"
 
 int main() {
-    Tree<DifferentiatorValue>* tree = NULL;
-    TreeInit<DifferentiatorValue>(tree, DifferentiatorValue {.type = operation, .value = ADD});
+    Tree<DifferentiatorValue> tree = {};
+    TreeInit<DifferentiatorValue>(&tree, DifferentiatorValue {.type = operation, .data = ADD});
+    TreeDump(&tree);
+    OpenDump(&tree);
+    TreeDtor(&tree);
 }

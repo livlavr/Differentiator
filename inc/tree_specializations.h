@@ -37,18 +37,7 @@ TreeErrors AddNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, Dif
 }
 
 template <>
-inline TreeErrors CreateNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>** node, DifferentiatorValue diff_value) {
-    check_expression(node, NODE_POINTER_IS_NULL);
-
-    *node = (TreeNode<DifferentiatorValue>*)calloc(1, sizeof(TreeNode<DifferentiatorValue>));
-    warning(*node, NODE_CALLOC_ERROR);
-
-    (*node)->value          = diff_value;
-    (*node)->error          = NO_TREE_ERRORS;
-    (*node)->number_of_kids = CHILD_FREE;
-    (*node)->left           = NULL;
-    (*node)->right          = NULL;
-    (*node)->parent         = NULL;
+inline TreeErrors FindRepeats<DifferentiatorValue>(TreeNode<DifferentiatorValue>* parent, TreeNode<DifferentiatorValue>* child) {
 
     return NO_TREE_ERRORS;
 }

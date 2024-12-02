@@ -4,6 +4,27 @@
 #include "tree.h"
 #include "tree_dump.h"
 #include "diff_definitions.h"
+#include "tree_specializations.h"
+
+#define _WriteOperationDescriptionToStream()                                                                                                           \
+    printf("< %s >", operation_symbol[(size_t)(node->value.data.variable_index)]);                                                                                                         \
+    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"peachpuff:red\" gradientangle=270,"                                              \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
+          "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
+           node, node, node->parent, node->number_of_kids, operation_symbol[(size_t)(node->value.data.operation)], node->left, node->right)    \
+
+#define _WriteVariableDescriptionToStream()  \
+    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"violet:darkcyan\""                                              \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
+          "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
+           node, node, node->parent, node->number_of_kids, variable_table[(size_t)(node->value.data.variable_index)], node->left, node->right) \
+
+#define _WriteNumberDescriptionToStream()                                                                                                           \
+    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
+          " [ %.3lf ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                \
+           node, node, node->parent, node->number_of_kids,                                                                                \
+           (size_t)(node->value.data.double_value), node->left, node->right)                                                              \
 
 template <>
 inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, FILE* dot_file) {
@@ -12,33 +33,21 @@ inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorVal
 
     switch(node->value.type) {
         case number   :
+            _WriteNumberDescriptionToStream();
+
             break;
         case variable :
+            _WriteVariableDescriptionToStream();
             break;
         case operation:
+            _WriteOperationDescriptionToStream();
             break;
         default:
-            color_printf(RED_COLOR, )
+            color_printf(RED_COLOR, BOLD, "Error in value type choice\n");
+            warning     (false, PROGRAM_ERROR);
     }
 
     return SUCCESS;
 }
 
-#define _WriteOperationDescriptionToStream()\
-    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"\
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"\
-          " %s | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",\
-           node, node, node->parent, node->error, node->number_of_kids, operation_symbol[(size_t)(node->value.operation)], node->left, node->right);\
-
-#define _WriteVariableDescriptionToStream ()\
-    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"\
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"\
-          " %s | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",\
-           node, node, node->parent, node->error, node->number_of_kids, variable_table[(size_t)(node->value.variable_index)], node->left, node->right);\
-
-#define _WriteNumberDescriptionToStream   ()\
-    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"\
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"\
-          " %.3lf | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",\
-           node, node, node->parent, node->error, node->number_of_kids, operation_symbol[(size_t)(node->value.double_value)], node->left, node->right);\
 #endif

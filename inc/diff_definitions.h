@@ -26,15 +26,15 @@ enum Operations {
     DIV = 3,
 };
 
-typedef union {
+union NodeValue{
     double     double_value = NAN;
     size_t     variable_index;
     Operations operation;
-} NodeValue;
+};
 
 struct DifferentiatorValue{
     NodeType   type;
-    NodeValue  value;
+    NodeValue  data = {.double_value = NAN};
 };
 
 // struct DifferentiatorNode{
