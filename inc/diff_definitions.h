@@ -27,7 +27,7 @@ enum Operations {
 };
 
 union NodeValue{
-    double     double_value = NAN;
+    double     double_value;
     size_t     variable_index;
     Operations operation;
 };
