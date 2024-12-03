@@ -6,8 +6,8 @@
 
 #include "tree.h"
 
-const char* operation_symbol[] = {"+", "-", "*", "/"};
-const char* variable_table  [] = {"x", "y", "z"}; //TODO change to template struct Buffer<...>
+static const char* operation_symbol[] = {"+", "-", "*", "/"};
+static const char* variable_table  [] = {"x", "y", "z"}; //TODO change to template struct Buffer<...>
 
 enum DifferentiatorError {
 
@@ -37,22 +37,7 @@ struct DifferentiatorValue{
     NodeValue  data = {.double_value = NAN};
 };
 
-// struct DifferentiatorNode{
-//     DifferentiatorNode* parent = NULL;
-//     DifferentiatorNode* left   = NULL;
-//     DifferentiatorNode* right  = NULL;
-//     NodeType            type;
-//     NodeValue*          value;
-// };
-
-// template <>
-// struct TreeNode<DiffValue> {
-//     TreeNode<DiffValue>* parent;
-//     TreeNode<DiffValue>* left;
-//     TreeNode<DiffValue>* right;
-//     TypeOfNode          type;
-//     NodeValue           value;
-//     int                 number_of_kids;
-// };
+TreeNode<DifferentiatorValue>* CreateDiffNode(DifferentiatorValue diff_value,
+    TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>*    right);
 
 #endif

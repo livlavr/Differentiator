@@ -1,13 +1,12 @@
-#ifndef DUMP_SPECIALIZATIONS_H_
-#define DUMP_SPECIALIZATIONS_H_
+#ifndef DIFF_DUMP_SPECIALIZATIONS_H_
+#define DIFF_DUMP_SPECIALIZATIONS_H_
 
 #include "tree.h"
 #include "tree_dump.h"
-#include "diff_definitions.h"
-#include "tree_specializations.h"
+#include "diff.h"
+#include "debug_macros.h"
 
-#define _WriteOperationDescriptionToStream()                                                                                                           \
-    printf("< %s >", operation_symbol[(size_t)(node->value.data.variable_index)]);                                                                                                         \
+#define _WriteOperationDescriptionToStream()                                                                                                          \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"peachpuff:red\" gradientangle=270,"                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
           "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
@@ -22,9 +21,9 @@
 #define _WriteNumberDescriptionToStream()                                                                                                           \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
-          " [ %.3lf ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                \
+          " [ %.1lf ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                \
            node, node, node->parent, node->number_of_kids,                                                                                \
-           (size_t)(node->value.data.double_value), node->left, node->right)                                                              \
+           node->value.data.double_value, node->left, node->right)                                                              \
 
 template <>
 inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, FILE* dot_file) {

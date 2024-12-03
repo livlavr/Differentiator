@@ -1,7 +1,7 @@
 CXX           = gcc-14
 
 SRC           = main.cpp
-SUBMODULE_SRC = Color-printf/color_printf.cpp
+SUBMODULE_SRC = Color-printf/color_printf.cpp src/diff.cpp
 B_SUBMODULES  = Color-printf/color_printf.cpp Stack/src/recalloc.cpp Stack/src/stack_public.cpp Stack/src/stack_security.cpp Stack/src/stack.cpp Stack/src/stack_dump.cpp
 
 BUILD_DIR     = ./build/

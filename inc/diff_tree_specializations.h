@@ -3,16 +3,16 @@
 
 #include "custom_asserts.h"
 #include "tree.h"
-#include "diff_definitions.h"
+#include "diff.h"
 
 
-#ifndef TREE_SPECIALIZATIONS_H_
-#define TREE_SPECIALIZATIONS_H_
+#ifndef DIFF_TREE_SPECIALIZATIONS_H_
+#define DIFF_TREE_SPECIALIZATIONS_H_
 
 //FUNCTION DECLARATION-----------------------------------------------------------------------
 
 template <>
-TreeErrors TreeInit<DifferentiatorValue>(Tree<DifferentiatorValue>* tree, DifferentiatorValue diff_value) {
+inline TreeErrors TreeInit<DifferentiatorValue>(Tree<DifferentiatorValue>* tree, DifferentiatorValue diff_value) {
     check_expression(tree, NODE_POINTER_IS_NULL);
 
     tree->error           = NO_TREE_ERRORS;
@@ -26,7 +26,7 @@ TreeErrors TreeInit<DifferentiatorValue>(Tree<DifferentiatorValue>* tree, Differ
 }
 
 template <>
-TreeErrors AddNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, DifferentiatorValue diff_value, int connection_side) {
+inline TreeErrors AddNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, DifferentiatorValue diff_value, int connection_side) {
     check_expression(node, NODE_POINTER_IS_NULL);
 
     TreeNode<DifferentiatorValue>* new_node = NULL;
@@ -41,14 +41,5 @@ inline TreeErrors FindRepeats<DifferentiatorValue>(TreeNode<DifferentiatorValue>
 
     return NO_TREE_ERRORS;
 }
-
-//DEFINES------------------------------------------------------------------------------------
-
-//PREORDER_PRINT
-#define PreorderPrintTree_(node_ptr) \
-    PrintTree(node_ptr);             \
-    printf("\n")
-
-//-------------------------------------------------------------------------------------------
 
 #endif
