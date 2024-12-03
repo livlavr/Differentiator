@@ -4,25 +4,21 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x136f046a0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x136f046a0 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ / ] | { <l> LEFT = [ 0x136f04400 ] | <r> RIGHT = [ 0x136f04670 ]}}" ];
-P0x136f04400 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x136f04400 ] | Parent = [ 0x136f046a0 ] | Number of kids = 2 |[ * ] | { <l> LEFT = [ 0x136f04140 ] | <r> RIGHT = [ 0x136f04480 ]}}" ];
-P0x136f04140 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x136f04140 ] | Parent = [ 0x136f04400 ] | Number of kids = 0 | [ 3.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f04480 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x136f04480 ] | Parent = [ 0x136f04400 ] | Number of kids = 0 |[ x ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f04400:<l> -> P0x136f04140
-P0x136f04400:<r> -> P0x136f04480
-P0x136f04670 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x136f04670 ] | Parent = [ 0x136f046a0 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x136f04610 ] | <r> RIGHT = [ 0x136f04640 ]}}" ];
-P0x136f04610 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x136f04610 ] | Parent = [ 0x136f04670 ] | Number of kids = 2 |[ - ] | { <l> LEFT = [ 0x136f04300 ] | <r> RIGHT = [ 0x136f045e0 ]}}" ];
-P0x136f04300 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x136f04300 ] | Parent = [ 0x136f04610 ] | Number of kids = 0 | [ 1000.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f045e0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x136f045e0 ] | Parent = [ 0x136f04610 ] | Number of kids = 2 |[ * ] | { <l> LEFT = [ 0x136f04330 ] | <r> RIGHT = [ 0x136f045b0 ]}}" ];
-P0x136f04330 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x136f04330 ] | Parent = [ 0x136f045e0 ] | Number of kids = 0 | [ 7.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f045b0 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x136f045b0 ] | Parent = [ 0x136f045e0 ] | Number of kids = 0 |[ x ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f045e0:<l> -> P0x136f04330
-P0x136f045e0:<r> -> P0x136f045b0
-P0x136f04610:<l> -> P0x136f04300
-P0x136f04610:<r> -> P0x136f045e0
-P0x136f04640 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x136f04640 ] | Parent = [ 0x136f04670 ] | Number of kids = 0 | [ 15.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x136f04670:<l> -> P0x136f04610
-P0x136f04670:<r> -> P0x136f04640
-P0x136f046a0:<l> -> P0x136f04400
-P0x136f046a0:<r> -> P0x136f04670
+P0x1338042c0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x1338042c0 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ * ] | { <l> LEFT = [ 0x133804130 ] | <r> RIGHT = [ 0x133804290 ]}}" ];
+P0x133804130 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804130 ] | Parent = [ 0x1338042c0 ] | Number of kids = 0 | [ 6.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x133804290 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804290 ] | Parent = [ 0x1338042c0 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x133804160 ] | <r> RIGHT = [ 0x133804260 ]}}" ];
+P0x133804160 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804160 ] | Parent = [ 0x133804290 ] | Number of kids = 0 | [ 7.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x133804260 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804260 ] | Parent = [ 0x133804290 ] | Number of kids = 2 |[ / ] | { <l> LEFT = [ 0x133804190 ] | <r> RIGHT = [ 0x133804230 ]}}" ];
+P0x133804190 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804190 ] | Parent = [ 0x133804260 ] | Number of kids = 0 | [ 15.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x133804230 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804230 ] | Parent = [ 0x133804260 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x1338041c0 ] | <r> RIGHT = [ 0x1338041f0 ]}}" ];
+P0x1338041c0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1338041c0 ] | Parent = [ 0x133804230 ] | Number of kids = 0 | [ 5.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x1338041f0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1338041f0 ] | Parent = [ 0x133804230 ] | Number of kids = 0 | [ 1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x133804230:<l> -> P0x1338041c0
+P0x133804230:<r> -> P0x1338041f0
+P0x133804260:<l> -> P0x133804190
+P0x133804260:<r> -> P0x133804230
+P0x133804290:<l> -> P0x133804160
+P0x133804290:<r> -> P0x133804260
+P0x1338042c0:<l> -> P0x133804130
+P0x1338042c0:<r> -> P0x133804290
 }

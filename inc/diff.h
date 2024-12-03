@@ -5,5 +5,6 @@
 #include "diff_dump_specializations.h"
 #include "diff_tree_specializations.h"
 #include "diff_DSL.h"
+#include "diffIO.h"
 
 #endif
