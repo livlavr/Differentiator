@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define NDEBUG
+
 #include "tree.h"
 #include "color_printf.h"
 #include "diff.h"
@@ -27,7 +29,7 @@ TreeNode<DifferentiatorValue>* GetE(const char* s, size_t* p) {
     while (s[*p] == '+' || s[*p] == '-') {
         int op = s[*p];
         (*p)++;
-        val2 = GetT(s, p);
+        val2 = GetE(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         if(op == '+') result = Add(val1, val2);
@@ -49,7 +51,7 @@ TreeNode<DifferentiatorValue>* GetT(const char* s, size_t* p) {
     while (s[*p] == '*' || s[*p] == '/') {
         int op = s[*p];
         (*p)++;
-        val2  = GetD(s, p);
+        val2  = GetT(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         if(op == '*') result = Mul(val1, val2);
@@ -70,7 +72,7 @@ TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p) {
 
     while (s[*p] == '^') {
         (*p)++;
-        val2   = GetP(s, p);
+        val2   = GetD(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         result = Deg(val1, val2);

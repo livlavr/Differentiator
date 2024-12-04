@@ -47,12 +47,7 @@ int main() {
     // TreeDtor(&tree);
     // p = 0;
     // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    tree.root = GetG("1 + 2 + 3", &p);
+    tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
     Dump(tree);
     TreeDtor(&tree);
 }
