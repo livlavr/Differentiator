@@ -4,21 +4,9 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x1338042c0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x1338042c0 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ * ] | { <l> LEFT = [ 0x133804130 ] | <r> RIGHT = [ 0x133804290 ]}}" ];
-P0x133804130 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804130 ] | Parent = [ 0x1338042c0 ] | Number of kids = 0 | [ 6.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x133804290 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804290 ] | Parent = [ 0x1338042c0 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x133804160 ] | <r> RIGHT = [ 0x133804260 ]}}" ];
-P0x133804160 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804160 ] | Parent = [ 0x133804290 ] | Number of kids = 0 | [ 7.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x133804260 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804260 ] | Parent = [ 0x133804290 ] | Number of kids = 2 |[ / ] | { <l> LEFT = [ 0x133804190 ] | <r> RIGHT = [ 0x133804230 ]}}" ];
-P0x133804190 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x133804190 ] | Parent = [ 0x133804260 ] | Number of kids = 0 | [ 15.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x133804230 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x133804230 ] | Parent = [ 0x133804260 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x1338041c0 ] | <r> RIGHT = [ 0x1338041f0 ]}}" ];
-P0x1338041c0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1338041c0 ] | Parent = [ 0x133804230 ] | Number of kids = 0 | [ 5.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x1338041f0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1338041f0 ] | Parent = [ 0x133804230 ] | Number of kids = 0 | [ 1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x133804230:<l> -> P0x1338041c0
-P0x133804230:<r> -> P0x1338041f0
-P0x133804260:<l> -> P0x133804190
-P0x133804260:<r> -> P0x133804230
-P0x133804290:<l> -> P0x133804160
-P0x133804290:<r> -> P0x133804260
-P0x1338042c0:<l> -> P0x133804130
-P0x1338042c0:<r> -> P0x133804290
+P0x138804140 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x138804140 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ + ] | { <l> LEFT = [ 0x138804080 ] | <r> RIGHT = [ 0x138804110 ]}}" ];
+P0x138804080 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x138804080 ] | Parent = [ 0x138804140 ] | Number of kids = 0 | [ 1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x138804110 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x138804110 ] | Parent = [ 0x138804140 ] | Number of kids = 0 | [ 3.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x138804140:<l> -> P0x138804080
+P0x138804140:<r> -> P0x138804110
 }

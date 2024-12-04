@@ -15,7 +15,7 @@
 #define _WriteVariableDescriptionToStream()  \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"violet:darkcyan\""                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
-          "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
+          "[ %c ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
            node, node, node->parent, node->number_of_kids, variable_table[(size_t)(node->value.data.variable_index)], node->left, node->right) \
 
 #define _WriteNumberDescriptionToStream()                                                                                                           \

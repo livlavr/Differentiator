@@ -6,8 +6,8 @@
 
 #include "tree.h"
 
-static const char* operation_symbol[] = {"+", "-", "*", "/"};
-static const char* variable_table  [] = {"x", "y", "z"}; //TODO change to template struct Buffer<...>
+static const char* operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "cos", "ln", "exp", "^"};
+static const char  variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
 
 enum DifferentiatorError {
 
@@ -20,10 +20,17 @@ enum NodeType{
 };
 
 enum Operations {
-    ADD = 0,
-    SUB = 1,
-    MUL = 2,
-    DIV = 3,
+    UNDEF = -1,
+    ADD   = 0,
+    SUB   = 1,
+    MUL   = 2,
+    DIV   = 3,
+    SQRT  = 4,
+    SIN   = 5,
+    COS   = 6,
+    LN    = 7,
+    EXP   = 8,
+    DEG   = 9,
 };
 
 union NodeValue{
