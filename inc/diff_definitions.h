@@ -45,6 +45,8 @@ struct DifferentiatorValue{
 };
 
 TreeNode<DifferentiatorValue>* CreateDiffNode(DifferentiatorValue diff_value,
-    TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>*    right);
+                 TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>* right);
+
+TYPE_OF_ERROR DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value);
 
 #endif

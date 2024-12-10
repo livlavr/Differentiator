@@ -5,7 +5,11 @@
 int main() {
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
-    TreeInit(&tree, DifferentiatorValue {});
+    DiffTreeInit(&tree, {});
+    // DifferentiatorValue value = {.type = operation, .data = {.operation = ADD}};
+    // AddNode(tree.root, &value, LEFT_SIDE);
+    // TreeDump(&tree);
+    // OpenDump(&tree);
     // tree.root = GetG("6 * (7^sqrt(2) / (5+1))", &p);
     // tree.root = GetG("2", &p);
     // Dump(tree);
@@ -42,13 +46,9 @@ int main() {
     // TreeDtor(&tree);
     // p = 0;
     // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    Dump(tree);
+    LinkNodes(tree.root, GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p), LEFT_SIDE);
+    TreeDump(&tree);
+    OpenDump(&tree);
     TreeDtor(&tree);
 }
 

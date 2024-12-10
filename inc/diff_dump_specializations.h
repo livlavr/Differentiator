@@ -6,23 +6,24 @@
 #include "diff.h"
 #include "debug_macros.h"
 
+// TODO PrintNode
 #define _WriteOperationDescriptionToStream()                                                                                                          \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"peachpuff:red\" gradientangle=270,"                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
           "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
-           node, node, node->parent, node->number_of_kids, operation_symbol[(size_t)(node->value.data.operation)], node->left, node->right)    \
+           node, node, node->parent, node->number_of_children, operation_symbol[(size_t)(node->value.data.operation)], node->left, node->right)    \
 
 #define _WriteVariableDescriptionToStream()  \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"violet:darkcyan\""                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
           "[ %c ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
-           node, node, node->parent, node->number_of_kids, variable_table[(size_t)(node->value.data.variable_index)], node->left, node->right) \
+           node, node, node->parent, node->number_of_children, variable_table[(size_t)(node->value.data.variable_index)], node->left, node->right) \
 
 #define _WriteNumberDescriptionToStream()                                                                                                           \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
           " [ %.1lf ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                \
-           node, node, node->parent, node->number_of_kids,                                                                                \
+           node, node, node->parent, node->number_of_children,                                                                                \
            node->value.data.double_value, node->left, node->right)                                                              \
 
 template <>
