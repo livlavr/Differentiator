@@ -6,8 +6,9 @@
 
 #include "tree.h"
 
-static const char* operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "cos", "ln", "exp", "^"};
-static const char  variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
+static const char*  operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "cos", "ln", "exp", "^"};
+static const char   variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
+static const double EPS = 1e-9;
 
 enum DifferentiatorError {
 

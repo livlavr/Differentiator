@@ -6,7 +6,7 @@
 #include "color_printf.h"
 #include "diff.h"
 
-TreeNode<DifferentiatorValue>* GetG(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetG(const char* s, size_t* p) { //TODO rename
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* val = GetE(s, p);

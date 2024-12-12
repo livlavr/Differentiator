@@ -1,61 +1,26 @@
 #include <stdio.h>
+#include <cmath>
 
 #include "diff.h"
 
 int main() {
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
+    Tree<DifferentiatorValue> tree2 = {};
     DiffTreeInit(&tree, {});
-    // DifferentiatorValue value = {.type = operation, .data = {.operation = ADD}};
-    // AddNode(tree.root, &value, LEFT_SIDE);
-    // TreeDump(&tree);
-    // OpenDump(&tree);
-    // tree.root = GetG("6 * (7^sqrt(2) / (5+1))", &p);
-    // tree.root = GetG("2", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2*2", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2*sqrt(2)", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p);
-    // Dump(tree);
-    // TreeDtor(&tree);
-    // p = 0;
-    // TreeInit(&tree, DifferentiatorValue {});
-    LinkNodes(tree.root, GetG("2^sqrt(2)*2 + 2 + (5 * sin(6*3)^cos(15)*ln(2)^exp(15) - 3*exp(sin(16)))", &p), LEFT_SIDE);
+    ReplaceNodes(&tree, &(tree.root), GetG("(sin(x))^(0-1)", &p));
+    TreeDump(&tree);
+    SimplifyTree(&tree);
     TreeDump(&tree);
     OpenDump(&tree);
-    TreeDtor(&tree);
-}
 
-// int main() {
-    // Tree<DifferentiatorValue> tree = {};
-    // TreeInit(&tree, DifferentiatorValue {});
-    // tree.root = Div(Mul(Num(3), Var(0)), Add(Sub(Num(1000), Mul(Num(7), Var(0))), Num(15)));
-    // Dump(tree);
-    // TreeDtor(&tree);
-// }
+    // DiffTreeInit(&tree2, {});
+    // ReplaceNodes(&tree2, &(tree2.root), CopySubtree(tree.root));
+    // TreeDump(&tree2);
+    // SimplifyTree(&tree2);
+    // TreeDump(&tree2);
+    // OpenDump(&tree2);
+
+    TreeDtor(&tree);
+    // TreeDtor(&tree2);
+}
