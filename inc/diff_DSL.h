@@ -4,7 +4,7 @@
 #include "diff.h"
 
 #define D(x) Differentiate(x)
-#define C(x) CopySubtree(x)
+#define CP(x) CopySubtree(x)
 
 #define  Num(amount     )  CreateDiffNode({.type = number   , .data = {.double_value   = amount   }}, NULL, NULL )
 #define  Var(var_index  )  CreateDiffNode({.type = variable , .data = {.variable_index = var_index}}, NULL, NULL )
@@ -19,18 +19,28 @@
 #define   Ln(left       )  CreateDiffNode({.type = operation, .data = {.operation      = LN       }}, left, NULL )
 #define  Exp(left       )  CreateDiffNode({.type = operation, .data = {.operation      = EXP      }}, left, NULL )
 
-#define  DiffNum(amount     )  CreateDiffNode({.type = number   , .data = {.double_value   = 0   }}, NULL, NULL )
-#define  DiffVar(var_index  )  CreateDiffNode({.type = variable , .data = {.variable_index = 0   }}, NULL, NULL )
+#define  DiffNum(amount     )  CreateDiffNode({.type = number   , .data = {.double_value   = 0        }}, NULL, NULL       )
+#define  DiffVar(var_index  )  CreateDiffNode({.type = variable , .data = {.variable_index = 1        }}, NULL, NULL       )
 #define  DiffAdd(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = ADD      }}, D(left), D(right))
-#define  DiffSub(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = SUB      }}, D(left), D(right))
-#define  DiffMul(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = ADD      }}, Mul(D(left), C(right)), Mul(C(left), D(right)))
-#define  DiffDiv(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = DIV      }}, Sub(Mul(D(left), C(right)), Mul(C(left), D(right))), Deg(C(right), Num(2)))
-#define  DiffDeg(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = MUL      }}, C(right), Deg(C(left), Sub(C(right), Num(1))))
-#define DiffSqrt(left       )  CreateDiffNode({.type = operation, .data = {.operation      = SQRT     }}, left, NULL )
-#define  DiffSin(left       )  CreateDiffNode({.type = operation, .data = {.operation      = SIN      }}, left, NULL )
-#define  DiffCos(left       )  CreateDiffNode({.type = operation, .data = {.operation      = COS      }}, left, NULL )
-#define   DiffLn(left       )  CreateDiffNode({.type = operation, .data = {.operation      = LN       }}, left, NULL )
-#define  DiffExp(left       )  CreateDiffNode({.type = operation, .data = {.operation      = EXP      }}, left, NULL )
 
+#define  DiffSub(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = SUB      }}, D(left), D(right))
+
+#define  DiffMul(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = ADD      }}, Mul(D(left), CP(right)),\
+                                                                                                          Mul(CP(left), D(right)))
+
+#define  DiffDiv(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = DIV      }}, Sub(Mul(D(left), CP(right)),\
+                                                                                                              Mul(CP(left), D(right))),\
+                                                                                                          Deg(CP(right), Num(2)))
+
+#define  DiffDeg(left, right)  CreateDiffNode({.type = operation, .data = {.operation      = MUL      }}, CP(right),\
+                                                                                                            Deg(CP(left),\
+                                                                                                                Sub(CP(right), Num(1))))
+
+#define DiffSqrt(left       )  CreateDiffNode({.type = operation, .data = {.operation      = DIV      }}, Num(1),\
+                                                                                                            Mul(Num(2)), CP(left))
+#define  DiffSin(left       )  CreateDiffNode({.type = operation, .data = {.operation      = COS      }}, left, NULL )
+#define  DiffCos(left       )  CreateDiffNode({.type = operation, .data = {.operation      = MUL      }}, Num(-1), Sin(left) )
+#define   DiffLn(left       )  CreateDiffNode({.type = operation, .data = {.operation      = DIV      }}, left, NULL )
+#define  DiffExp(left       )  CreateDiffNode({.type = operation, .data = {.operation      = MUL      }}, Exp(2), NULL )
 
 #endif

@@ -4,11 +4,13 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x152904170 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x152904170 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ ^ ] | { <l> LEFT = [ 0x1529040b0 ] | <r> RIGHT = [ 0x1529041a0 ]}}" ];
-P0x1529040b0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x1529040b0 ] | Parent = [ 0x152904170 ] | Number of kids = 1 |[ sin ] | { <l> LEFT = [ 0x152904080 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x152904080 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x152904080 ] | Parent = [ 0x1529040b0 ] | Number of kids = 0 |[ x ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x1529040b0:<l> -> P0x152904080
-P0x1529041a0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1529041a0 ] | Parent = [ 0x152904170 ] | Number of kids = 0 | [ -1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x152904170:<l> -> P0x1529040b0
-P0x152904170:<r> -> P0x1529041a0
+P0x154606060 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x154606060 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ / ] | { <l> LEFT = [ 0x154605cf0 ] | <r> RIGHT = [ 0x154606030 ]}}" ];
+P0x154605cf0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x154605cf0 ] | Parent = [ 0x154606060 ] | Number of kids = 0 | [ 1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x154606030 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x154606030 ] | Parent = [ 0x154606060 ] | Number of kids = 1 |[ ln ] | { <l> LEFT = [ 0x154605d50 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x154605d50 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x154605d50 ] | Parent = [ 0x154606030 ] | Number of kids = 1 |[ sin ] | { <l> LEFT = [ 0x154605d20 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x154605d20 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x154605d20 ] | Parent = [ 0x154605d50 ] | Number of kids = 0 |[ z ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
+P0x154605d50:<l> -> P0x154605d20
+P0x154606030:<l> -> P0x154605d50
+P0x154606060:<l> -> P0x154605cf0
+P0x154606060:<r> -> P0x154606030
 }

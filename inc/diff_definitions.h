@@ -8,7 +8,7 @@
 
 static const char*  operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "cos", "ln", "exp", "^"};
 static const char   variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
-static const double EPS = 1e-9;
+static const double EPS = 1e-5;
 
 enum DifferentiatorError {
 

@@ -29,7 +29,6 @@ TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     do {
         simplifications_number = 0;
         RecursiveSimplifyTree(tree, &(tree->root), &simplifications_number);
-        TreeDump(tree);
     }while(simplifications_number != 0);
 
     return SUCCESS;
@@ -49,7 +48,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
             if(((*node)->left->value.type == (*node)->right->value.type) && ((*node)->left->value.type == number)) {
                 double left_value  = (*node)->left->value.data.double_value;
                 double right_value = (*node)->right->value.data.double_value;
-                *simplifications_number++;
+                (*simplifications_number)++;
                 switch((*node)->value.data.operation) {
                     case ADD:
                         SimplifyTwoArgumentsOperation(+);
@@ -65,9 +64,10 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                         warning(false, PROGRAM_ERROR);
                 }
             }
-            else if((*node)->left->value.type == number || (*node)->left->value.type == number) {
+            else if(((*node)->left->value.type == number) || ((*node)->right->value.type == number)) {
                 if((*node)->left->value.type == number) {
-                    if(abs((*node)->left->value.data.double_value) < EPS) {
+                    if(IsEqual((*node)->left->value.data.double_value, 0, EPS)) {
+                        (*simplifications_number)++;
                         switch((*node)->value.data.operation) {
                             case ADD:
                                 ReplaceNodes(tree, node, CopySubtree((*node)->right));
@@ -79,55 +79,70 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                                 warning(false, PROGRAM_ERROR);
                         }
                     }
-                    else if(abs((*node)->left->value.data.double_value - 1) < EPS) { //TODO isequal() function
+                    else if(IsEqual((*node)->left->value.data.double_value, 1, EPS)) { //TODO isequal() function
                         switch((*node)->value.data.operation) {
                             case MUL:
-                                ReplaceNodes(tree, node, CopySubtree((*node)->left));
+                                (*simplifications_number)++;
+                                ReplaceNodes(tree, node, CopySubtree((*node)->right));
                                 break;
                             case DEG:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(1));
                                 break;
-                            case UNDEF: default:
+                            case UNDEF:
                                 warning(false, PROGRAM_ERROR);
+                            default:
+                                break;
                         }
                     }
                 }
                 else if((*node)->right->value.type == number) {
-                    if(abs((*node)->right->value.data.double_value) < EPS) {
+                    if(fabs((*node)->right->value.data.double_value) < EPS) {
                         switch((*node)->value.data.operation) {
                             case ADD: case SUB:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, CopySubtree((*node)->left));
                                 break;
                             case MUL:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(0));
                                 break;
                             case DEG:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(1));
                                 break;
-                            case UNDEF: default:
+                            case UNDEF:
                                 warning(false, PROGRAM_ERROR);
+                            default:
+                                break;
                         }
                     }
-                    else if(abs((*node)->right->value.data.double_value - 1) < EPS) { //TODO isequal() function
+                    else if(IsEqual((*node)->right->value.data.double_value, 1, EPS)) {
                         switch((*node)->value.data.operation) {
                             case MUL: case DIV: case DEG:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, CopySubtree((*node)->left));
                                 break;
-                            case UNDEF: default:
+                            case UNDEF:
                                 warning(false, PROGRAM_ERROR);
+                            default:
+                                break;
                         }
                     }
-                    else if(abs((*node)->right->value.data.double_value - (-1)) < EPS) {
-                        TreeNode<DifferentiatorValue>* left_subtree_copy = CopySubtree((*node)->left);
+                    else if(IsEqual((*node)->right->value.data.double_value, -1, EPS)) {
                         switch((*node)->value.data.operation) {
                             case DIV:
+                                (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Mul(Num(-1), CopySubtree((*node)->left)));
                                 break;
                             case DEG:
-                                ReplaceNodes(tree, node, Div(Num(1), (*node)->left));
+                                (*simplifications_number)++;
+                                ReplaceNodes(tree, node, Div(Num(1), CopySubtree((*node)->left)));
                                 break;
-                            case UNDEF: default:
+                            case UNDEF:
                                 warning(false, PROGRAM_ERROR);
+                            default:
+                                break;
                         }
                     }
                 }
@@ -135,7 +150,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
         }
         else if((*node)->left->value.type == number){
             double left_value  = (*node)->left->value.data.double_value;
-            *simplifications_number++;
+            (*simplifications_number)++;
             switch((*node)->value.data.operation) {
                 case SQRT:
                     SimplifyOneArgumentOperation(sqrt);
@@ -153,7 +168,12 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
             }
         }
     }
+
     return SUCCESS;
+}
+
+bool IsEqual(double first_value, double second_value, double eps) {
+    return ((first_value - second_value) < eps) && ((second_value - first_value) < eps);
 }
 
 TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node) {
@@ -164,44 +184,29 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node) 
 
 }
 
-//TODO in Tree.h
 TYPE_OF_ERROR ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
                            TreeNode<DifferentiatorValue>* node_after) {
     check_expression(*node_before, POINTER_IS_NULL);
     check_expression(node_after,   POINTER_IS_NULL);
 
+    TreeNode<DifferentiatorValue>* new_node = NULL;
+    if(node_after->parent)
+        new_node = CopySubtree(node_after);
+    else
+        new_node = node_after;
+
     if((*node_before)->parent) {
         if((*node_before)->parent->left == *node_before) {
-            ReplaceSubtree(LEFT_SIDE);
+            ReplaceSubtree(LEFT_SIDE, new_node);
         }
         else {
-            ReplaceSubtree(RIGHT_SIDE);
+            ReplaceSubtree(RIGHT_SIDE, new_node);
         }
     }
     else {
-        DestroySubtree(node_before);
+        DestroySubtree<DifferentiatorValue>(node_before);
         tree->root = node_after;
     }
-
-    return SUCCESS;
-}
-
-TYPE_OF_ERROR DestroySubtree(TreeNode<DifferentiatorValue>** node) {
-    if(!(*node)) return SUCCESS;
-
-    DestroySubtree(&((*node)->left));
-    DestroySubtree(&((*node)->right));
-
-    DestroySingleNode(node);
-
-    return SUCCESS;
-}
-
-TYPE_OF_ERROR DestroySingleNode(TreeNode<DifferentiatorValue>** node) {
-    check_expression(*node, POINTER_IS_NULL);
-
-    free(*node);
-    *node = NULL;
 
     return SUCCESS;
 }

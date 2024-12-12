@@ -6,14 +6,14 @@
 int main() {
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
-    Tree<DifferentiatorValue> tree2 = {};
     DiffTreeInit(&tree, {});
-    ReplaceNodes(&tree, &(tree.root), GetG("(sin(x))^(0-1)", &p));
+    ReplaceNodes(&tree, &(tree.root), GetG("ln(sin(z))^(0 - 1)", &p));
     TreeDump(&tree);
+    OpenDump(&tree);
     SimplifyTree(&tree);
     TreeDump(&tree);
     OpenDump(&tree);
-
+    // sin(15*x^3) + cos(20*x)^3
     // DiffTreeInit(&tree2, {});
     // ReplaceNodes(&tree2, &(tree2.root), CopySubtree(tree.root));
     // TreeDump(&tree2);
