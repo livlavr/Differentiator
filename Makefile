@@ -1,6 +1,6 @@
 CXX           = gcc-14
 
-SRC           = main.cpp diff.cpp diffIO.cpp
+SRC           = main.cpp diff.cpp diffIO.cpp diff_simplifier.cpp
 SUBMODULE_SRC = Color-printf/color_printf.cpp
 B_SUBMODULES  = Color-printf/color_printf.cpp Stack/src/recalloc.cpp Stack/src/stack_public.cpp Stack/src/stack_security.cpp Stack/src/stack.cpp Stack/src/stack_dump.cpp
 
