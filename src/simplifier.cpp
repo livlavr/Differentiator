@@ -31,14 +31,14 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                 (*simplifications_number)++;
                 switch((*node)->value.data.operation) {
                     case ADD:
-                        SimplifyTwoArgumentsOperation(+);
+                        SimplifyTwoArgsOperation(+);
                     case SUB:
-                        SimplifyTwoArgumentsOperation(-);
+                        SimplifyTwoArgsOperation(-);
                     case MUL:
-                        SimplifyTwoArgumentsOperation(*);
+                        SimplifyTwoArgsOperation(*);
                     case DIV:
-                        SimplifyTwoArgumentsOperation(/);
-                    case DEG:
+                        SimplifyTwoArgsOperation(/);
+                    case POW:
                         SimplifyPow();
                     case UNDEF: default:
                         warning(false, PROGRAM_ERROR);
@@ -52,7 +52,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                             case ADD:
                                 ReplaceNodes(tree, node, CopySubtree((*node)->right));
                                 break;
-                            case MUL: case DIV: case DEG:
+                            case MUL: case DIV: case POW:
                                 ReplaceNodes(tree, node, Num(0));
                                 break;
                             case UNDEF: default:
@@ -65,7 +65,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, CopySubtree((*node)->right));
                                 break;
-                            case DEG:
+                            case POW:
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(1));
                                 break;
@@ -87,7 +87,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(0));
                                 break;
-                            case DEG:
+                            case POW:
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Num(1));
                                 break;
@@ -99,7 +99,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                     }
                     else if(IsEqual((*node)->right->value.data.double_value, 1, EPS)) {
                         switch((*node)->value.data.operation) {
-                            case MUL: case DIV: case DEG:
+                            case MUL: case DIV: case POW:
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, CopySubtree((*node)->left));
                                 break;
@@ -115,7 +115,7 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Mul(Num(-1), CopySubtree((*node)->left)));
                                 break;
-                            case DEG:
+                            case POW:
                                 (*simplifications_number)++;
                                 ReplaceNodes(tree, node, Div(Num(1), CopySubtree((*node)->left)));
                                 break;
@@ -133,15 +133,15 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
             (*simplifications_number)++;
             switch((*node)->value.data.operation) {
                 case SQRT:
-                    SimplifyOneArgumentOperation(sqrt);
+                    SimplifyOneArgOperation(sqrt);
                 case SIN:
-                    SimplifyOneArgumentOperation(sin);
+                    SimplifyOneArgOperation(sin);
                 case COS:
-                    SimplifyOneArgumentOperation(cos);
+                    SimplifyOneArgOperation(cos);
                 case LN:
-                    SimplifyOneArgumentOperation(log2);
+                    SimplifyOneArgOperation(log2);
                 case EXP:
-                    SimplifyOneArgumentOperation(exp);
+                    SimplifyOneArgOperation(exp);
                 case UNDEF:
                 default:
                     warning(false, PROGRAM_ERROR);
@@ -151,3 +151,5 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
 
     return SUCCESS;
 }
+
+TYPE_OF_ERROR CollapseConstant()

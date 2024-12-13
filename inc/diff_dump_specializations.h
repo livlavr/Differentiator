@@ -8,23 +8,20 @@
 
 // TODO PrintNode
 #define _WriteOperationDescriptionToStream()                                                                                                          \
-    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"peachpuff:red\" gradientangle=270,"                                              \
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
-          "[ %s ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
-           node, node, node->parent, node->number_of_children, operation_symbol[(size_t)(node->value.data.operation)], node->left, node->right)    \
+    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] |"                                                                          \
+          " %s | { <l> [ %p ] | <r> [ %p ]}}\" ];\n",                                                                                   \
+           node, node, node->parent, operation_symbol[(size_t)(node->value.data.operation)], node->left, node->right)    \
 
 #define _WriteVariableDescriptionToStream()  \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"violet:darkcyan\""                                              \
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
-          "[ %c ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                   \
-           node, node, node->parent, node->number_of_children, variable_table[(size_t)(node->value.data.variable_index)], node->left, node->right) \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] | %c }\" ];\n",                                                                                   \
+           node, node, node->parent, variable_table[(size_t)(node->value.data.variable_index)]) \
 
 #define _WriteNumberDescriptionToStream()                                                                                                           \
-    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
-          "label=\" {Node = [ %p ] | Parent = [ %p ] | Number of kids = %d |"                                                                          \
-          " [ %.1lf ] | { <l> LEFT = [ %p ] | <r> RIGHT = [ %p ]}}\" ];\n",                                                                                \
-           node, node, node->parent, node->number_of_children,                                                                                \
-           node->value.data.double_value, node->left, node->right)                                                              \
+    fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"peachpuff:red\" gradientangle=270,"                                              \
+          "label=\" {Node = [ %p ] | Parent = [ %p ] | %.3lf }\" ];\n",                                                                                \
+           node, node, node->parent, node->value.data.double_value)                                                              \
 
 template <>
 inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, FILE* dot_file) {
@@ -34,7 +31,6 @@ inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorVal
     switch(node->value.type) {
         case number   :
             _WriteNumberDescriptionToStream();
-
             break;
         case variable :
             _WriteVariableDescriptionToStream();

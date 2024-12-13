@@ -75,7 +75,7 @@ TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p) {
         val2   = GetD(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
-        result = Deg(val1, val2);
+        result = Pow(val1, val2);
     }
     SkipSpaces(s, p);
     return result;

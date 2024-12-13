@@ -1,5 +1,5 @@
-#ifndef DIFF_SIMPLIFIER_H_
-#define DIFF_SIMPLIFIER_H_
+#ifndef SIMPLIFIER_H_
+#define SIMPLIFIER_H_
 
 #include "diff.h"
 #include "tree.h"
@@ -12,18 +12,20 @@ TYPE_OF_ERROR ReplaceNodes         (Tree<DifferentiatorValue>* tree, TreeNode<Di
                                     TreeNode<DifferentiatorValue>* node_after);
 bool IsEqual(double first_value, double second_value, double eps);
 
+#define SimplifyOperation()
+
 //TODO maybe add only in cpp file
 #define ReplaceSubtree(side, new_node)\
     TreeNode<DifferentiatorValue>* parent_node = (*node_before)->parent;\
     DestroySubtree(node_before);\
     LinkNodes(parent_node, new_node, side)
 
-#define SimplifyTwoArgumentsOperation(operator)\
+#define SimplifyTwoArgsOperation(operator)\
     result = left_value operator right_value;\
     ReplaceNodes(tree, node, Num(result));\
     break
 
-#define SimplifyOneArgumentOperation(operator)\
+#define SimplifyOneArgOperation(operator)\
     result = operator(left_value);\
     ReplaceNodes(tree, node, Num(result));\
     break
@@ -32,5 +34,8 @@ bool IsEqual(double first_value, double second_value, double eps);
     result = pow(left_value, right_value);\
     ReplaceNodes(tree, node, Num(result));\
     break
+
+#define SimplifyNumbersOperation()\
+
 
 #endif

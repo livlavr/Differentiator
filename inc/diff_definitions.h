@@ -31,7 +31,7 @@ enum Operations {
     COS   = 6,
     LN    = 7,
     EXP   = 8,
-    DEG   = 9,
+    POW   = 9,
 };
 
 union NodeValue{

@@ -4,13 +4,13 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x11e606960 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x11e606960 ] | Parent = [ 0x0 ] | Number of kids = 2 |[ / ] | { <l> LEFT = [ 0x11e606830 ] | <r> RIGHT = [ 0x11e606930 ]}}" ];
-P0x11e606830 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x11e606830 ] | Parent = [ 0x11e606960 ] | Number of kids = 0 | [ 1.0 ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x11e606930 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x11e606930 ] | Parent = [ 0x11e606960 ] | Number of kids = 1 |[ ln ] | { <l> LEFT = [ 0x11e606900 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x11e606900 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x11e606900 ] | Parent = [ 0x11e606930 ] | Number of kids = 1 |[ sin ] | { <l> LEFT = [ 0x11e606860 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x11e606860 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x11e606860 ] | Parent = [ 0x11e606900 ] | Number of kids = 0 |[ z ] | { <l> LEFT = [ 0x0 ] | <r> RIGHT = [ 0x0 ]}}" ];
-P0x11e606900:<l> -> P0x11e606860
-P0x11e606930:<l> -> P0x11e606900
-P0x11e606960:<l> -> P0x11e606830
-P0x11e606960:<r> -> P0x11e606930
+P0x14df04560 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14df04560 ] | Parent = [ 0x0 ] | / | { <l> [ 0x14df04400 ] | <r> [ 0x14df04530 ]}}" ];
+P0x14df04400 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14df04400 ] | Parent = [ 0x14df04560 ] | 1.000 }" ];
+P0x14df04530 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14df04530 ] | Parent = [ 0x14df04560 ] | ln | { <l> [ 0x14df04330 ] | <r> [ 0x0 ]}}" ];
+P0x14df04330 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14df04330 ] | Parent = [ 0x14df04530 ] | sin | { <l> [ 0x14df04300 ] | <r> [ 0x0 ]}}" ];
+P0x14df04300 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x14df04300 ] | Parent = [ 0x14df04330 ] | z }" ];
+P0x14df04330:<l> -> P0x14df04300
+P0x14df04530:<l> -> P0x14df04330
+P0x14df04560:<l> -> P0x14df04400
+P0x14df04560:<r> -> P0x14df04530
 }
