@@ -4,23 +4,35 @@
 #include "diff.h"
 
 int main() {
+    // sin(15*x^3) + cos(20*x)^3
+
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
     DiffTreeInit(&tree, {});
-    ReplaceNodes(&tree, &(tree.root), GetG("ln(sin(z))^(0 - 1)", &p));
-    TreeDump(&tree);
+    ReplaceNodes(&tree, &(tree.root), GetG("x - 0", &p));
     OpenDump(&tree);
     SimplifyTree(&tree);
-    TreeDump(&tree);
     OpenDump(&tree);
-    // sin(15*x^3) + cos(20*x)^3
-    // DiffTreeInit(&tree2, {});
-    // ReplaceNodes(&tree2, &(tree2.root), CopySubtree(tree.root));
-    // TreeDump(&tree2);
-    // SimplifyTree(&tree2);
-    // TreeDump(&tree2);
-    // OpenDump(&tree2);
+    // ReplaceNodes(&tree, &(tree.root), GetG("0 - x", &p));
+    // OpenDump(&tree);
+    // SimplifyTree(&tree);
+    // OpenDump(&tree);
+    // ReplaceNodes(&tree, &(tree.root), GetG("x - 1", &p));
+    // OpenDump(&tree);
+    // SimplifyTree(&tree);
+    // OpenDump(&tree);
+    // ReplaceNodes(&tree, &(tree.root), GetG("1 - x", &p));
+    // OpenDump(&tree);
+    // SimplifyTree(&tree);
+    // OpenDump(&tree);
+    // ReplaceNodes(&tree, &(tree.root), GetG("x - (0 - 1)", &p));
+    // OpenDump(&tree);
+    // SimplifyTree(&tree);
+    // OpenDump(&tree);
+    // ReplaceNodes(&tree, &(tree.root), GetG("(0 - 1) - x", &p));
+    // OpenDump(&tree);
+    // SimplifyTree(&tree);
+    // OpenDump(&tree);
 
     TreeDtor(&tree);
-    // TreeDtor(&tree2);
 }

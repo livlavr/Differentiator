@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "*.def": "cpp",
+        "ios": "cpp",
+        "__locale": "cpp",
+        "__bit_reference": "cpp",
+        "bitset": "cpp",
+        "__memory": "cpp",
+        "limits": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp"
+    }
+}

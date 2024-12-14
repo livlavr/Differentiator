@@ -4,6 +4,19 @@
 #include "diff.h"
 #include "tree.h"
 
+#define EvalTwoArgsOperation(operation) \
+    double result = 0;\
+    result = (*node)->left->value.data.double_value operation (*node)->right->value.data.double_value;\
+    ReplaceNodes(tree, node, Num(result))
+
+#define EvalFunction(function) \
+    double result = 0;\
+    result = function((*node)->left->value.data.double_value);\
+    ReplaceNodes(tree, node, Num(result))
+
+#define  D(x) RecursiveSubtreeDerivation(x)
+#define CP(x) CopySubtree(x)
+
 TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     size_t simplifications_number = 0;
     do {
@@ -22,134 +35,52 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
     RecursiveSimplifyTree(tree, &(*node)->left,  simplifications_number);
     RecursiveSimplifyTree(tree, &(*node)->right, simplifications_number);
 
-    if(((*node))->value.type == operation) {
-        double result = 0;
-        if((*node)->right) {
-            if(((*node)->left->value.type == (*node)->right->value.type) && ((*node)->left->value.type == number)) {
-                double left_value  = (*node)->left->value.data.double_value;
-                double right_value = (*node)->right->value.data.double_value;
-                (*simplifications_number)++;
-                switch((*node)->value.data.operation) {
-                    case ADD:
-                        SimplifyTwoArgsOperation(+);
-                    case SUB:
-                        SimplifyTwoArgsOperation(-);
-                    case MUL:
-                        SimplifyTwoArgsOperation(*);
-                    case DIV:
-                        SimplifyTwoArgsOperation(/);
-                    case POW:
-                        SimplifyPow();
-                    case UNDEF: default:
-                        warning(false, PROGRAM_ERROR);
-                }
-            }
-            else if(((*node)->left->value.type == number) || ((*node)->right->value.type == number)) {
-                if((*node)->left->value.type == number) {
-                    if(IsEqual((*node)->left->value.data.double_value, 0, EPS)) {
-                        (*simplifications_number)++;
-                        switch((*node)->value.data.operation) {
-                            case ADD:
-                                ReplaceNodes(tree, node, CopySubtree((*node)->right));
-                                break;
-                            case MUL: case DIV: case POW:
-                                ReplaceNodes(tree, node, Num(0));
-                                break;
-                            case UNDEF: default:
-                                warning(false, PROGRAM_ERROR);
-                        }
-                    }
-                    else if(IsEqual((*node)->left->value.data.double_value, 1, EPS)) { //TODO isequal() function
-                        switch((*node)->value.data.operation) {
-                            case MUL:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, CopySubtree((*node)->right));
-                                break;
-                            case POW:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, Num(1));
-                                break;
-                            case UNDEF:
-                                warning(false, PROGRAM_ERROR);
-                            default:
-                                break;
-                        }
-                    }
-                }
-                else if((*node)->right->value.type == number) {
-                    if(fabs((*node)->right->value.data.double_value) < EPS) {
-                        switch((*node)->value.data.operation) {
-                            case ADD: case SUB:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, CopySubtree((*node)->left));
-                                break;
-                            case MUL:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, Num(0));
-                                break;
-                            case POW:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, Num(1));
-                                break;
-                            case UNDEF:
-                                warning(false, PROGRAM_ERROR);
-                            default:
-                                break;
-                        }
-                    }
-                    else if(IsEqual((*node)->right->value.data.double_value, 1, EPS)) {
-                        switch((*node)->value.data.operation) {
-                            case MUL: case DIV: case POW:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, CopySubtree((*node)->left));
-                                break;
-                            case UNDEF:
-                                warning(false, PROGRAM_ERROR);
-                            default:
-                                break;
-                        }
-                    }
-                    else if(IsEqual((*node)->right->value.data.double_value, -1, EPS)) {
-                        switch((*node)->value.data.operation) {
-                            case DIV:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, Mul(Num(-1), CopySubtree((*node)->left)));
-                                break;
-                            case POW:
-                                (*simplifications_number)++;
-                                ReplaceNodes(tree, node, Div(Num(1), CopySubtree((*node)->left)));
-                                break;
-                            case UNDEF:
-                                warning(false, PROGRAM_ERROR);
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
+    #define OPERATOR(OP, OP_SIGN, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,\
+                                              LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,\
+                                              LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION,\
+                                              ...)\
+        if((*node)->value.type == operation && (*node)->value.data.operation == OP) {\
+            if((*node)->right) {\
+                if((*node)->left->value.type == number) {\
+                    if((*node)->right->value.type == number) {\
+                        EVAL_VALUE;\
+                        TreeDump(tree);\
+                    }\
+                    else if(IsEqual((*node)->left->value.data.double_value,  0, EPS)) {\
+                        LEFT_ZERO_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                    else if(IsEqual((*node)->left->value.data.double_value,  1, EPS)) {\
+                        LEFT_ONE_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                    else if(IsEqual((*node)->left->value.data.double_value, -1, EPS)) {\
+                        LEFT_MINUS_ONE_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                }\
+                else if((*node)->right->value.type == number) {\
+                    if(IsEqual((*node)->right->value.data.double_value,       0, EPS)) {\
+                        RIGHT_ZERO_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                    else if(IsEqual((*node)->right->value.data.double_value,  1, EPS)) {\
+                        RIGHT_ONE_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                    else if(IsEqual((*node)->right->value.data.double_value, -1, EPS)) {\
+                        RIGHT_MINUS_ONE_SIMPLIFICATION;\
+                        TreeDump(tree);\
+                    }\
+                }\
+            }\
+            else if((*node)->left->value.type == number) {\
+                EVAL_VALUE;\
+                TreeDump(tree);\
+            }\
         }
-        else if((*node)->left->value.type == number){
-            double left_value  = (*node)->left->value.data.double_value;
-            (*simplifications_number)++;
-            switch((*node)->value.data.operation) {
-                case SQRT:
-                    SimplifyOneArgOperation(sqrt);
-                case SIN:
-                    SimplifyOneArgOperation(sin);
-                case COS:
-                    SimplifyOneArgOperation(cos);
-                case LN:
-                    SimplifyOneArgOperation(log2);
-                case EXP:
-                    SimplifyOneArgOperation(exp);
-                case UNDEF:
-                default:
-                    warning(false, PROGRAM_ERROR);
-            }
-        }
-    }
+
+    #include "codegen.def"
 
     return SUCCESS;
 }
-
-TYPE_OF_ERROR CollapseConstant()
