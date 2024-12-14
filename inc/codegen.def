@@ -20,7 +20,7 @@ OPERATOR(SUB, "-", {
     EvalTwoArgsOperation(-);
 }, {
     (*simplifications_number)++;
-    ReplaceNodes(tree, node, Mul(Num(-1), (*node)->right));
+    ReplaceNodes(tree, node, Mul(Num(-1), CP((*node)->right)));
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
@@ -58,7 +58,7 @@ OPERATOR(DIV, "/", {
     ReplaceNodes(tree, node, (*node)->left);
 }, {}, {
     (*simplifications_number)++;
-    ReplaceNodes(tree, node, Mul(Num(-1), (*node)->left));
+    ReplaceNodes(tree, node, Mul(Num(-1), CP((*node)->left)));
 }, {
     Div(Sub(Mul(D(left), CP(right)), Mul(CP(left), D(right))), Pow(CP(right), Num(2)));
 }
@@ -82,7 +82,7 @@ OPERATOR(POW, "^", {
     ReplaceNodes(tree, node, (*node)->left);
 }, {}, {
     (*simplifications_number)++;
-    ReplaceNodes(tree, node, Div(Num(1), (*node)->left));
+    ReplaceNodes(tree, node, Div(Num(1), CP((*node)->left)));
 }, {
     Mul(CP(right), Pow(CP(left), Sub(CP(right), Num(1))));
 }
@@ -98,21 +98,21 @@ OPERATOR(SQRT, "sqrt", {
 OPERATOR(SIN, "sin", {
     EvalFunction(sin);
 }, {}, {}, {}, {}, {}, {}, {
-    Cos((*node)->left);
+    Cos(CP((*node)->left));
 }
 )
 
 OPERATOR(COS, "cos", {
     EvalFunction(cos);
 }, {}, {}, {}, {}, {}, {}, {
-    Mul(Num(-1), Sin((*node)->left));
+    Mul(Num(-1), Sin(CP((*node)->left)));
 }
 )
 
 OPERATOR(LN, "ln", {
     EvalFunction(log2);
 }, {}, {}, {}, {}, {}, {}, {
-    Div(Num(1), (*node)->right);
+    Div(Num(1), CP((*node)->right));
 }
 )
 

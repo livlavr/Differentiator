@@ -41,10 +41,12 @@ TYPE_OF_ERROR ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<Differentia
     check_expression(node_after,   POINTER_IS_NULL);
 
     TreeNode<DifferentiatorValue>* new_node = NULL;
-    if(node_after->parent)
+    if(node_after->parent){
         new_node = CopySubtree(node_after);
-    else
+    }
+    else {
         new_node = node_after;
+    }
 
     if((*node_before)->parent) {
         if((*node_before)->parent->left == *node_before) {
@@ -56,7 +58,7 @@ TYPE_OF_ERROR ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<Differentia
     }
     else {
         DestroySubtree<DifferentiatorValue>(node_before);
-        tree->root = node_after;
+        tree->root = new_node;
     }
 
     return SUCCESS;
