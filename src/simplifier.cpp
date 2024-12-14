@@ -4,19 +4,6 @@
 #include "diff.h"
 #include "tree.h"
 
-#define EvalTwoArgsOperation(operation) \
-    double result = 0;\
-    result = (*node)->left->value.data.double_value operation (*node)->right->value.data.double_value;\
-    ReplaceNodes(tree, node, Num(result))
-
-#define EvalFunction(function) \
-    double result = 0;\
-    result = function((*node)->left->value.data.double_value);\
-    ReplaceNodes(tree, node, Num(result))
-
-#define  D(x) RecursiveSubtreeDerivation(x)
-#define CP(x) CopySubtree(x)
-
 TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     size_t simplifications_number = 0;
     do {

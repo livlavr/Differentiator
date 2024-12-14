@@ -8,6 +8,9 @@
 #include "diff_DSL.h"
 #include "diffIO.h"
 
+TYPE_OF_ERROR DerivateTree(Tree<DifferentiatorValue>* tree);
+TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node);
+
 #ifndef NDEBUG
     #define WriteIfDebug(expression) expression
 #else

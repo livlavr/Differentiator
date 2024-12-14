@@ -35,7 +35,19 @@ bool IsEqual(double first_value, double second_value, double eps);
     ReplaceNodes(tree, node, Num(result));\
     break
 
-#define SimplifyNumbersOperation()\
+#define EvalTwoArgsOperation(operation) \
+    double result = 0;\
+    result = (*node)->left->value.data.double_value operation (*node)->right->value.data.double_value;\
+    ReplaceNodes(tree, node, Num(result))
+
+#define EvalFunction(function) \
+    double result = 0;\
+    result = function((*node)->left->value.data.double_value);\
+    ReplaceNodes(tree, node, Num(result))
+
+#define  D(x) RecursiveSubtreeDerivation(tree, x)
+
+#define CP(x) CopySubtree(x)
 
 
 #endif

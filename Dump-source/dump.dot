@@ -4,9 +4,33 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x147606920 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x147606920 ] | Parent = [ 0x0 ] | ^ | { <l> [ 0x147606830 ] | <r> [ 0x1476068f0 ]}}" ];
-P0x147606830 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x147606830 ] | Parent = [ 0x147606920 ] | -1.000 }" ];
-P0x1476068f0 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x1476068f0 ] | Parent = [ 0x147606920 ] | x }" ];
-P0x147606920:<l> -> P0x147606830
-P0x147606920:<r> -> P0x1476068f0
+P0x1219047b0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1219047b0 ] | Parent = [ 0x0 ] | * | { <l> [ 0x120f04560 ] | <r> [ 0x121904780 ]}}" ];
+P0x120f04560 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x120f04560 ] | Parent = [ 0x1219047b0 ] | ^ | { <l> [ 0x120f04140 ] | <r> [ 0x120f04530 ]}}" ];
+P0x120f04140 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x120f04140 ] | Parent = [ 0x120f04560 ] | 2.718 }" ];
+P0x120f04530 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x120f04530 ] | Parent = [ 0x120f04560 ] | * | { <l> [ 0x120f04400 ] | <r> [ 0x120f04330 ]}}" ];
+P0x120f04400 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x120f04400 ] | Parent = [ 0x120f04530 ] | x }" ];
+P0x120f04330 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x120f04330 ] | Parent = [ 0x120f04530 ] | ln | { <l> [ 0x120f04300 ] | <r> [ 0x0 ]}}" ];
+P0x120f04300 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x120f04300 ] | Parent = [ 0x120f04330 ] | x }" ];
+P0x120f04330:<l> -> P0x120f04300
+P0x120f04530:<l> -> P0x120f04400
+P0x120f04530:<r> -> P0x120f04330
+P0x120f04560:<l> -> P0x120f04140
+P0x120f04560:<r> -> P0x120f04530
+P0x121904780 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x121904780 ] | Parent = [ 0x1219047b0 ] | + | { <l> [ 0x120e05d50 ] | <r> [ 0x121904750 ]}}" ];
+P0x120e05d50 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x120e05d50 ] | Parent = [ 0x121904780 ] | ln | { <l> [ 0x120e06000 ] | <r> [ 0x0 ]}}" ];
+P0x120e06000 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x120e06000 ] | Parent = [ 0x120e05d50 ] | x }" ];
+P0x120e05d50:<l> -> P0x120e06000
+P0x121904750 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x121904750 ] | Parent = [ 0x121904780 ] | * | { <l> [ 0x1219045a0 ] | <r> [ 0x1218042c0 ]}}" ];
+P0x1219045a0 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x1219045a0 ] | Parent = [ 0x121904750 ] | x }" ];
+P0x1218042c0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1218042c0 ] | Parent = [ 0x121904750 ] | / | { <l> [ 0x121804260 ] | <r> [ 0x121804290 ]}}" ];
+P0x121804260 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x121804260 ] | Parent = [ 0x1218042c0 ] | 1.000 }" ];
+P0x121804290 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x121804290 ] | Parent = [ 0x1218042c0 ] | x }" ];
+P0x1218042c0:<l> -> P0x121804260
+P0x1218042c0:<r> -> P0x121804290
+P0x121904750:<l> -> P0x1219045a0
+P0x121904750:<r> -> P0x1218042c0
+P0x121904780:<l> -> P0x120e05d50
+P0x121904780:<r> -> P0x121904750
+P0x1219047b0:<l> -> P0x120f04560
+P0x1219047b0:<r> -> P0x121904780
 }

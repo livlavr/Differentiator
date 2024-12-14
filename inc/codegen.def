@@ -1,7 +1,7 @@
 //OPERATOR(operation, operation_sign, EvalValue, LeftZeroSimplification,     RightZeroSimplification,
 //                                               LeftOneSimplification,      RightOneSimplification,
 //                                               LeftMinusOneSimplification, RightMinusOneSimplification,
-//                                               Differentiation)
+//                                               Differentiated)
 
 OPERATOR(ADD, "+", {
     EvalTwoArgsOperation(+);
@@ -11,8 +11,8 @@ OPERATOR(ADD, "+", {
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
-}, {}, {}, {}, {}, {
-    Add(D(left), D(right));
+}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Add(D(CP(node->left)), D(CP(node->right)));
 }
 )
 
@@ -24,8 +24,8 @@ OPERATOR(SUB, "-", {
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
-}, {}, {}, {}, {}, {
-    Sub(D(left), D(right));
+}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Sub(D(CP(node->left)), D(CP(node->right)));
 }
 )
 
@@ -43,8 +43,8 @@ OPERATOR(MUL, "*", {
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
-}, {}, {}, {
-    Add(Mul(D(left), CP(right)), Mul(CP(left), D(right)));
+}, {{}}, {{}}, {
+    diff_result = Add(Mul(D(CP(node->left)), CP(node->right)), Mul(CP(node->left), D(CP(node->right))));
 }
 )
 
@@ -53,14 +53,14 @@ OPERATOR(DIV, "/", {
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, Num(0));
-}, {}, {}, {
+}, {{}}, {{}}, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
-}, {}, {
+}, {{}}, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, Mul(Num(-1), CP((*node)->left)));
 }, {
-    Div(Sub(Mul(D(left), CP(right)), Mul(CP(left), D(right))), Pow(CP(right), Num(2)));
+    diff_result = Div(Sub(Mul(D(CP(node->left)), CP(node->right)), Mul(CP(node->left), D(CP(node->left)))), Pow(CP(node->right), Num(2)));
 }
 )
 
@@ -80,43 +80,53 @@ OPERATOR(POW, "^", {
 }, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, (*node)->left);
-}, {}, {
+}, {{}}, {
     (*simplifications_number)++;
     ReplaceNodes(tree, node, Div(Num(1), CP((*node)->left)));
 }, {
-    Mul(CP(right), Pow(CP(left), Sub(CP(right), Num(1))));
+    if(node->right->value.type == number) {
+        diff_result = Mul(Mul(CP(node->right), Pow(CP(node->left), Sub(CP(node->right), Num(1)))), D(CP(node->left)));
+    }
+    else if(node->left->value.type == number) {
+        diff_result = Mul(Mul(CP(node), Ln(CP(node->left))), D(CP(node->right)));
+    }
+    else {
+        diff_result = D(Pow((Num(exp(1))), Mul(CP(node->right), Ln(CP(node->left)))));
+    }
 }
 )
 
 OPERATOR(SQRT, "sqrt", {
     EvalFunction(sqrt);
-}, {}, {}, {}, {}, {}, {}, {
-    Div(Num(1), Mul(Num(2)), CP(left));
+}, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Mul(Div(Num(1), Mul(Num(2), CP(node->left))), D(CP(node->left)));
 }
 )
 
 OPERATOR(SIN, "sin", {
     EvalFunction(sin);
-}, {}, {}, {}, {}, {}, {}, {
-    Cos(CP((*node)->left));
+}, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Mul(Cos(CP(node->left)), D(CP(node->left)));
 }
 )
 
 OPERATOR(COS, "cos", {
     EvalFunction(cos);
-}, {}, {}, {}, {}, {}, {}, {
-    Mul(Num(-1), Sin(CP((*node)->left)));
+}, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Mul(Mul(Num(-1), Sin(CP(node->left))), D(CP(node->left)));
 }
 )
 
 OPERATOR(LN, "ln", {
-    EvalFunction(log2);
-}, {}, {}, {}, {}, {}, {}, {
-    Div(Num(1), CP((*node)->right));
+    EvalFunction(log);
+}, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Mul(Div(Num(1), CP(node->left)), D(CP(node->left)));
 }
 )
 
 OPERATOR(EXP, "exp", {
     EvalFunction(exp);
-}, {}, {}, {}, {}, {}, {}, {}
+}, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
+    diff_result = Mul(CP(node->left), D(CP(node->left)));
+}
 )
