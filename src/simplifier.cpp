@@ -19,10 +19,10 @@ TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
         RecursiveSimplifyTree(tree, &(tree->root), &simplifications_number, latex_file);
     }while(simplifications_number != 0);
 
+    fprintf(latex_file, "\\textbf{После упрощения получаем:}\\\\\n");
     fprintf(latex_file, "$");
     RecursiveWriteToLatex(tree, tree->root, latex_file);
     fprintf(latex_file, "$\\\\\n");
-
 
     fclose(latex_file);
 

@@ -48,10 +48,10 @@ static const char* derivation_latex_beginning[] = {
     "\\section{Ну давай попробуем свои силы}\n"};
 
 static const char* latex_ending[] = {
-    "УРААААААА ПОБЕДА, производная просто опущена как дешёвка\n\\end{document}\n",
-    "СОСАТЬ АМЕРИКА, ПРОИЗВОДНАЯ ГОТОВА\n\\end{document}\n",
-    "КАК ЖЕ МЫ С ТОБОЙ ЕЁ СДЕЛАЛИ\n\\end{document}\n",
-    "ДА УЖ, СТУДЕНТАМ ИЗ ВШЭ ТАКОЕ И НЕ СНИЛОСЬ\n\\end{document}\n"};
+    "\\LARGE УРААААААА ПОБЕДА, производная просто опущена как дешёвка\n\\end{document}\n",
+    "\\LARGE СОСАТЬ АМЕРИКА, ПРОИЗВОДНАЯ ГОТОВА\n\\end{document}\n",
+    "\\LARGE КАК ЖЕ МЫ С ТОБОЙ ЕЁ СДЕЛАЛИ\n\\end{document}\n",
+    "\\LARGE ДА УЖ, СТУДЕНТАМ ИЗ ВШЭ ТАКОЕ И НЕ СНИЛОСЬ\n\\end{document}\n"};
 
 static const char* phrases[] = {
     "\\subsection{Любому советскому школьнику очевидно, что}\n",

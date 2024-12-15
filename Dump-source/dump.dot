@@ -4,59 +4,67 @@ rankdir=HR;
 nodesep=0.4;
 node [shape=record, fontname="Arial"];
 edge [style=bold, color="black", weight=10, penwidth=4, arrowsize=0.2];
-P0x142f04a20 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04a20 ] | Parent = [ 0x0 ] | - | { <l> [ 0x142f04720 ] | <r> [ 0x142f049f0 ]}}" ];
-P0x142f04720 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04720 ] | Parent = [ 0x142f04a20 ] | * | { <l> [ 0x142f045e0 ] | <r> [ 0x142f046f0 ]}}" ];
-P0x142f045e0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f045e0 ] | Parent = [ 0x142f04720 ] | cos | { <l> [ 0x142f045b0 ] | <r> [ 0x0 ]}}" ];
-P0x142f045b0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f045b0 ] | Parent = [ 0x142f045e0 ] | * | { <l> [ 0x142f04400 ] | <r> [ 0x142f04580 ]}}" ];
-P0x142f04400 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04400 ] | Parent = [ 0x142f045b0 ] | 15.000 }" ];
-P0x142f04580 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04580 ] | Parent = [ 0x142f045b0 ] | ^ | { <l> [ 0x142f04520 ] | <r> [ 0x142f04550 ]}}" ];
-P0x142f04520 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x142f04520 ] | Parent = [ 0x142f04580 ] | x }" ];
-P0x142f04550 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04550 ] | Parent = [ 0x142f04580 ] | 3.000 }" ];
-P0x142f04580:<l> -> P0x142f04520
-P0x142f04580:<r> -> P0x142f04550
-P0x142f045b0:<l> -> P0x142f04400
-P0x142f045b0:<r> -> P0x142f04580
-P0x142f045e0:<l> -> P0x142f045b0
-P0x142f046f0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f046f0 ] | Parent = [ 0x142f04720 ] | * | { <l> [ 0x142f04630 ] | <r> [ 0x142f046c0 ]}}" ];
-P0x142f04630 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04630 ] | Parent = [ 0x142f046f0 ] | 45.000 }" ];
-P0x142f046c0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f046c0 ] | Parent = [ 0x142f046f0 ] | ^ | { <l> [ 0x142f04660 ] | <r> [ 0x142f04690 ]}}" ];
-P0x142f04660 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x142f04660 ] | Parent = [ 0x142f046c0 ] | x }" ];
-P0x142f04690 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04690 ] | Parent = [ 0x142f046c0 ] | 2.000 }" ];
-P0x142f046c0:<l> -> P0x142f04660
-P0x142f046c0:<r> -> P0x142f04690
-P0x142f046f0:<l> -> P0x142f04630
-P0x142f046f0:<r> -> P0x142f046c0
-P0x142f04720:<l> -> P0x142f045e0
-P0x142f04720:<r> -> P0x142f046f0
-P0x142f049f0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f049f0 ] | Parent = [ 0x142f04a20 ] | * | { <l> [ 0x142f04750 ] | <r> [ 0x142f049c0 ]}}" ];
-P0x142f04750 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04750 ] | Parent = [ 0x142f049f0 ] | 3.000 }" ];
-P0x142f049c0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f049c0 ] | Parent = [ 0x142f049f0 ] | * | { <l> [ 0x142f04870 ] | <r> [ 0x142f04990 ]}}" ];
-P0x142f04870 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04870 ] | Parent = [ 0x142f049c0 ] | ^ | { <l> [ 0x142f04810 ] | <r> [ 0x142f04840 ]}}" ];
-P0x142f04810 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04810 ] | Parent = [ 0x142f04870 ] | cos | { <l> [ 0x142f047e0 ] | <r> [ 0x0 ]}}" ];
-P0x142f047e0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f047e0 ] | Parent = [ 0x142f04810 ] | * | { <l> [ 0x142f04780 ] | <r> [ 0x142f047b0 ]}}" ];
-P0x142f04780 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04780 ] | Parent = [ 0x142f047e0 ] | 20.000 }" ];
-P0x142f047b0 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x142f047b0 ] | Parent = [ 0x142f047e0 ] | x }" ];
-P0x142f047e0:<l> -> P0x142f04780
-P0x142f047e0:<r> -> P0x142f047b0
-P0x142f04810:<l> -> P0x142f047e0
-P0x142f04840 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f04840 ] | Parent = [ 0x142f04870 ] | 2.000 }" ];
-P0x142f04870:<l> -> P0x142f04810
-P0x142f04870:<r> -> P0x142f04840
-P0x142f04990 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04990 ] | Parent = [ 0x142f049c0 ] | * | { <l> [ 0x142f048a0 ] | <r> [ 0x142f04960 ]}}" ];
-P0x142f048a0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f048a0 ] | Parent = [ 0x142f04990 ] | 20.000 }" ];
-P0x142f04960 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04960 ] | Parent = [ 0x142f04990 ] | sin | { <l> [ 0x142f04930 ] | <r> [ 0x0 ]}}" ];
-P0x142f04930 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x142f04930 ] | Parent = [ 0x142f04960 ] | ^ | { <l> [ 0x142f048d0 ] | <r> [ 0x142f04900 ]}}" ];
-P0x142f048d0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x142f048d0 ] | Parent = [ 0x142f04930 ] | 20.000 }" ];
-P0x142f04900 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x142f04900 ] | Parent = [ 0x142f04930 ] | x }" ];
-P0x142f04930:<l> -> P0x142f048d0
-P0x142f04930:<r> -> P0x142f04900
-P0x142f04960:<l> -> P0x142f04930
-P0x142f04990:<l> -> P0x142f048a0
-P0x142f04990:<r> -> P0x142f04960
-P0x142f049c0:<l> -> P0x142f04870
-P0x142f049c0:<r> -> P0x142f04990
-P0x142f049f0:<l> -> P0x142f04750
-P0x142f049f0:<r> -> P0x142f049c0
-P0x142f04a20:<l> -> P0x142f04720
-P0x142f04a20:<r> -> P0x142f049f0
+P0x14f705700 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705700 ] | Parent = [ 0x0 ] | + | { <l> [ 0x14f704f50 ] | <r> [ 0x14f7056d0 ]}}" ];
+P0x14f704f50 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f704f50 ] | Parent = [ 0x14f705700 ] | * | { <l> [ 0x14f704a10 ] | <r> [ 0x159104240 ]}}" ];
+P0x14f704a10 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f704a10 ] | Parent = [ 0x14f704f50 ] | cos | { <l> [ 0x14f7049e0 ] | <r> [ 0x0 ]}}" ];
+P0x14f7049e0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f7049e0 ] | Parent = [ 0x14f704a10 ] | * | { <l> [ 0x14f704920 ] | <r> [ 0x14f7049b0 ]}}" ];
+P0x14f704920 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f704920 ] | Parent = [ 0x14f7049e0 ] | 15.000 }" ];
+P0x14f7049b0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f7049b0 ] | Parent = [ 0x14f7049e0 ] | ^ | { <l> [ 0x14f704950 ] | <r> [ 0x14f704980 ]}}" ];
+P0x14f704950 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x14f704950 ] | Parent = [ 0x14f7049b0 ] | x }" ];
+P0x14f704980 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f704980 ] | Parent = [ 0x14f7049b0 ] | 3.000 }" ];
+P0x14f7049b0:<l> -> P0x14f704950
+P0x14f7049b0:<r> -> P0x14f704980
+P0x14f7049e0:<l> -> P0x14f704920
+P0x14f7049e0:<r> -> P0x14f7049b0
+P0x14f704a10:<l> -> P0x14f7049e0
+P0x159104240 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x159104240 ] | Parent = [ 0x14f704f50 ] | * | { <l> [ 0x159104110 ] | <r> [ 0x159104210 ]}}" ];
+P0x159104110 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x159104110 ] | Parent = [ 0x159104240 ] | 15.000 }" ];
+P0x159104210 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x159104210 ] | Parent = [ 0x159104240 ] | * | { <l> [ 0x159104140 ] | <r> [ 0x1591041d0 ]}}" ];
+P0x159104140 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x159104140 ] | Parent = [ 0x159104210 ] | 3.000 }" ];
+P0x1591041d0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x1591041d0 ] | Parent = [ 0x159104210 ] | ^ | { <l> [ 0x159104170 ] | <r> [ 0x1591041a0 ]}}" ];
+P0x159104170 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x159104170 ] | Parent = [ 0x1591041d0 ] | x }" ];
+P0x1591041a0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x1591041a0 ] | Parent = [ 0x1591041d0 ] | 2.000 }" ];
+P0x1591041d0:<l> -> P0x159104170
+P0x1591041d0:<r> -> P0x1591041a0
+P0x159104210:<l> -> P0x159104140
+P0x159104210:<r> -> P0x1591041d0
+P0x159104240:<l> -> P0x159104110
+P0x159104240:<r> -> P0x159104210
+P0x14f704f50:<l> -> P0x14f704a10
+P0x14f704f50:<r> -> P0x159104240
+P0x14f7056d0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f7056d0 ] | Parent = [ 0x14f705700 ] | * | { <l> [ 0x14f705250 ] | <r> [ 0x14f7056a0 ]}}" ];
+P0x14f705250 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705250 ] | Parent = [ 0x14f7056d0 ] | * | { <l> [ 0x14f7050a0 ] | <r> [ 0x14f705220 ]}}" ];
+P0x14f7050a0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f7050a0 ] | Parent = [ 0x14f705250 ] | 3.000 }" ];
+P0x14f705220 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705220 ] | Parent = [ 0x14f705250 ] | ^ | { <l> [ 0x14f705160 ] | <r> [ 0x159204140 ]}}" ];
+P0x14f705160 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705160 ] | Parent = [ 0x14f705220 ] | cos | { <l> [ 0x14f705130 ] | <r> [ 0x0 ]}}" ];
+P0x14f705130 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705130 ] | Parent = [ 0x14f705160 ] | * | { <l> [ 0x14f7050d0 ] | <r> [ 0x14f705100 ]}}" ];
+P0x14f7050d0 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f7050d0 ] | Parent = [ 0x14f705130 ] | 20.000 }" ];
+P0x14f705100 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x14f705100 ] | Parent = [ 0x14f705130 ] | x }" ];
+P0x14f705130:<l> -> P0x14f7050d0
+P0x14f705130:<r> -> P0x14f705100
+P0x14f705160:<l> -> P0x14f705130
+P0x159204140 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x159204140 ] | Parent = [ 0x14f705220 ] | 2.000 }" ];
+P0x14f705220:<l> -> P0x14f705160
+P0x14f705220:<r> -> P0x159204140
+P0x14f705250:<l> -> P0x14f7050a0
+P0x14f705250:<r> -> P0x14f705220
+P0x14f7056a0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f7056a0 ] | Parent = [ 0x14f7056d0 ] | * | { <l> [ 0x14f705430 ] | <r> [ 0x159004080 ]}}" ];
+P0x14f705430 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705430 ] | Parent = [ 0x14f7056a0 ] | * | { <l> [ 0x14f705340 ] | <r> [ 0x14f705400 ]}}" ];
+P0x14f705340 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f705340 ] | Parent = [ 0x14f705430 ] | -1.000 }" ];
+P0x14f705400 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f705400 ] | Parent = [ 0x14f705430 ] | sin | { <l> [ 0x14f7053d0 ] | <r> [ 0x0 ]}}" ];
+P0x14f7053d0 [style = "filled, rounded", fillcolor="yellow:magenta" gradientangle=270,label=" {Node = [ 0x14f7053d0 ] | Parent = [ 0x14f705400 ] | * | { <l> [ 0x14f705370 ] | <r> [ 0x14f7053a0 ]}}" ];
+P0x14f705370 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x14f705370 ] | Parent = [ 0x14f7053d0 ] | 20.000 }" ];
+P0x14f7053a0 [style = "filled, rounded", fillcolor="violet:darkcyan"label=" {Node = [ 0x14f7053a0 ] | Parent = [ 0x14f7053d0 ] | x }" ];
+P0x14f7053d0:<l> -> P0x14f705370
+P0x14f7053d0:<r> -> P0x14f7053a0
+P0x14f705400:<l> -> P0x14f7053d0
+P0x14f705430:<l> -> P0x14f705340
+P0x14f705430:<r> -> P0x14f705400
+P0x159004080 [style = "filled, rounded", fillcolor="peachpuff:red" gradientangle=270,label=" {Node = [ 0x159004080 ] | Parent = [ 0x14f7056a0 ] | 20.000 }" ];
+P0x14f7056a0:<l> -> P0x14f705430
+P0x14f7056a0:<r> -> P0x159004080
+P0x14f7056d0:<l> -> P0x14f705250
+P0x14f7056d0:<r> -> P0x14f7056a0
+P0x14f705700:<l> -> P0x14f704f50
+P0x14f705700:<r> -> P0x14f7056d0
 }

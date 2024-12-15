@@ -10,14 +10,13 @@ int main() {
     Tree<DifferentiatorValue> tree = {};
     DiffTreeInit(&tree, {});
     BeginLatexFile();
-    ReplaceNodes(&tree, &(tree.root), GetG("cos(15*x^3)*45*x^2 - 3*cos(20*x)^2*20*sin(20^x)", &p));
+    ReplaceNodes(&tree, &(tree.root), GetG("sin(15*x^3) + cos(20*x)^3", &p));
     TreeDump(&tree);
     SimplifyTree(&tree);
+    TreeDump(&tree);
     DerivateTree(&tree);
-    // TreeDump(&tree);
+    TreeDump(&tree);
     SimplifyTree(&tree);
-    // TreeDump(&tree);
-    // OpenDump(&tree);
     EndLatexFile();
     TreeDtor(&tree);
 }

@@ -7,12 +7,11 @@ TYPE_OF_ERROR DerivateTree(Tree<DifferentiatorValue>* tree) {
     check_expression(tree, POINTER_IS_NULL);
 
     FILE* latex_file = fopen("Latex/diff.tex", "a");
+    PrintPhrase(latex_file, derivation_latex_beginning, derivation_latex_beginning_size);
 
     Tree<DifferentiatorValue> derivated_tree = {};
     DiffTreeInit(&derivated_tree, {});
-    PrintPhrase(latex_file, derivation_latex_beginning, derivation_latex_beginning_size);
-    RecursiveSubtreeDerivation(tree, tree->root, latex_file);
-    ReplaceNodes(tree, &(tree->root), derivated_tree.root);
+    ReplaceNodes(tree, &(derivated_tree.root), RecursiveSubtreeDerivation(tree, tree->root, latex_file));
 
     fclose(latex_file);
 
@@ -41,7 +40,7 @@ TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorVal
     #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,\
                                               LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,\
                                               LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION,\
-                                              DIFFERENTIATED, ...)\
+                                              DIFFERENTIATED)\
         if(node->value.type == operation && node->value.data.operation == OP) {\
             DIFFERENTIATED;\
             PrintPhrase(latex_file, phrases, phrases_size);\

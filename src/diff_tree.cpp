@@ -32,7 +32,6 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node) 
 
     return CreateDiffNode({.type = node->value.type, .data = node->value.data},
                    CopySubtree(node->left), CopySubtree(node->right));
-
 }
 
 TYPE_OF_ERROR ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
