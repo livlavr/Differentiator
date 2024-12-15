@@ -6,7 +6,7 @@
 
 TYPE_OF_ERROR SimplifyTree         (Tree<DifferentiatorValue>* tree);
 TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node,
-                                    size_t* simplifications_number);
+                                    size_t* simplifications_number, FILE* latex_file);
 TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node);
 TYPE_OF_ERROR ReplaceNodes         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
                                     TreeNode<DifferentiatorValue>* node_after);
@@ -45,7 +45,7 @@ bool IsEqual(double first_value, double second_value, double eps);
     result = function((*node)->left->value.data.double_value);\
     ReplaceNodes(tree, node, Num(result))
 
-#define  D(x) RecursiveSubtreeDerivation(tree, x)
+#define  D(x) RecursiveSubtreeDerivation(tree, x, latex_file)
 
 #define CP(x) CopySubtree(x)
 

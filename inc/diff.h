@@ -7,9 +7,11 @@
 #include "simplifier.h"
 #include "diff_DSL.h"
 #include "diffIO.h"
+#include "latex_output.h"
 
 TYPE_OF_ERROR DerivateTree(Tree<DifferentiatorValue>* tree);
-TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node);
+TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorValue>* tree,
+                                    TreeNode<DifferentiatorValue>* node, FILE* latex_file);
 
 #ifndef NDEBUG
     #define WriteIfDebug(expression) expression

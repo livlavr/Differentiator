@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{xcolor}
+\usepackage{makecell}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{listings}
+\usepackage{tikz}
+\linespread{1.5}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\usepackage[
+    ignoreheadfoot,
+    top=2 cm,
+    bottom=2 cm,
+    left=2 cm,
+    right=2 cm,
+    footskip=1.0 cm,
+]{geometry}
+\begin{document}
+\begingroup
+    \centering
+    \LARGE Дифференцирование\\
+    \large \today \\[0.5em]
+    \large Лаврущев Иван Б05-431\par
+\endgroup
+\tableofcontents
+\section{Хмм, как бы здесь изъебнуться}
+$\cos(15 \cdot x^{3}) \cdot 45 \cdot x^{2} - 3 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x})$\\
+$\cos(15 \cdot x^{3}) \cdot 45 \cdot x^{2} - 3 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x})$\\
+\section{ПОГНАЛИ}
+\subsection{А вот здесь нихуя не тривиально}
+$(15)' = 0$
+\subsection{Земля тебе пухом}
+$(x)' = 1$
+\subsection{Хватит сидеть в тик токе, лучше уясни этот момент, коллега}
+$(x^{3})' = 3 \cdot x^{3 - 1} \cdot 1$
+\subsection{Ты реально не можешь понять, что}
+$(15 \cdot x^{3})' = 0 \cdot x^{3} + 15 \cdot 3 \cdot x^{3 - 1} \cdot 1$
+\subsection{Коллеги не падайте со стульев, тут полный шок}
+$(\cos(15 \cdot x^{3}))' = -1 \cdot \sin(15 \cdot x^{3}) \cdot 0 \cdot x^{3} + 15 \cdot 3 \cdot x^{3 - 1} \cdot 1$
+\subsection{Четыре часа ночи я сижу блять фразы для дифференциатора пишу}
+$(45)' = 0$
+\subsection{А вот здесь нихуя не тривиально}
+$(x)' = 1$
+\subsection{Какое милое говно}
+$(x^{2})' = 2 \cdot x^{2 - 1} \cdot 1$
+\subsection{Кто посчитает, тот получит энергосик}
+$(45 \cdot x^{2})' = 0 \cdot x^{2} + 45 \cdot 2 \cdot x^{2 - 1} \cdot 1$
+\subsection{Земля тебе пухом}
+$(\cos(15 \cdot x^{3}) \cdot 45 \cdot x^{2})' = -1 \cdot \sin(15 \cdot x^{3}) \cdot 0 \cdot x^{3} + 15 \cdot 3 \cdot x^{3 - 1} \cdot 1 \cdot 45 \cdot x^{2} + \cos(15 \cdot x^{3}) \cdot 0 \cdot x^{2} + 45 \cdot 2 \cdot x^{2 - 1} \cdot 1$
+\subsection{Наши папы не работают в банках, и мы не катаемся на иномарках}
+$(3)' = 0$
+\subsection{Четыре часа ночи я сижу блять фразы для дифференциатора пишу}
+$(20)' = 0$
+\subsection{АААААААААААА что делать с этой залупой}
+$(x)' = 1$
+\subsection{Ничего на свете лучше неееету, чем взять производную вот ээээту}
+$(20 \cdot x)' = 0 \cdot x + 20 \cdot 1$
+\subsection{Ну дальше совсем тривиальная задача, коллеги}
+$(\cos(20 \cdot x))' = -1 \cdot \sin(20 \cdot x) \cdot 0 \cdot x + 20 \cdot 1$
+\subsection{А мог бы сейчас в Бауманке чилить, но нет, захотел заниматься этой хуйней}
+$(\cos(20 \cdot x)^{2})' = 2 \cdot \cos(20 \cdot x)^{2 - 1} \cdot -1 \cdot \sin(20 \cdot x) \cdot 0 \cdot x + 20 \cdot 1$
+\subsection{Кто не посчитает получит пиздюлей}
+$(20)' = 0$
+\subsection{Блин жрать охота, может пойти дошик заварить}
+$(x)' = 1$
+\subsection{В душе все мы немножко с шизой}
+$(20^{x})' = 20^{x} \cdot \ln(20) \cdot 1$
+\subsection{Ну дальше совсем тривиальная задача, коллеги}
+$(\sin(20^{x}))' = \cos(20^{x}) \cdot 20^{x} \cdot \ln(20) \cdot 1$
+\subsection{Как тебя земля вообще носит, если ты не понимаешь, что}
+$(20 \cdot \sin(20^{x}))' = 0 \cdot \sin(20^{x}) + 20 \cdot \cos(20^{x}) \cdot 20^{x} \cdot \ln(20) \cdot 1$
+\subsection{Мама забери меня отсюда}
+$(\cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x}))' = 2 \cdot \cos(20 \cdot x)^{2 - 1} \cdot -1 \cdot \sin(20 \cdot x) \cdot 0 \cdot x + 20 \cdot 1 \cdot 20 \cdot \sin(20^{x}) + \cos(20 \cdot x)^{2} \cdot 0 \cdot \sin(20^{x}) + 20 \cdot \cos(20^{x}) \cdot 20^{x} \cdot \ln(20) \cdot 1$
+\subsection{Нас не отправляют учиться в Лондон}
+$(3 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x}))' = 0 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x}) + 3 \cdot 2 \cdot \cos(20 \cdot x)^{2 - 1} \cdot -1 \cdot \sin(20 \cdot x) \cdot 0 \cdot x + 20 \cdot 1 \cdot 20 \cdot \sin(20^{x}) + \cos(20 \cdot x)^{2} \cdot 0 \cdot \sin(20^{x}) + 20 \cdot \cos(20^{x}) \cdot 20^{x} \cdot \ln(20) \cdot 1$
+\subsection{Как тебя земля вообще носит, если ты не понимаешь, что}
+$(\cos(15 \cdot x^{3}) \cdot 45 \cdot x^{2} - 3 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x}))' = -1 \cdot \sin(15 \cdot x^{3}) \cdot 0 \cdot x^{3} + 15 \cdot 3 \cdot x^{3 - 1} \cdot 1 \cdot 45 \cdot x^{2} + \cos(15 \cdot x^{3}) \cdot 0 \cdot x^{2} + 45 \cdot 2 \cdot x^{2 - 1} \cdot 1 - 0 \cdot \cos(20 \cdot x)^{2} \cdot 20 \cdot \sin(20^{x}) + 3 \cdot 2 \cdot \cos(20 \cdot x)^{2 - 1} \cdot -1 \cdot \sin(20 \cdot x) \cdot 0 \cdot x + 20 \cdot 1 \cdot 20 \cdot \sin(20^{x}) + \cos(20 \cdot x)^{2} \cdot 0 \cdot \sin(20^{x}) + 20 \cdot \cos(20^{x}) \cdot 20^{x} \cdot \ln(20) \cdot 1$
+\section{Хмм, как бы здесь изъебнуться}
+$nan$\\
+$nan$\\
+КАК ЖЕ МЫ С ТОБОЙ ЕЁ СДЕЛАЛИ
+\end{document}

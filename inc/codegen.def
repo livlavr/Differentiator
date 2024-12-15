@@ -1,9 +1,11 @@
-//OPERATOR(operation, operation_sign, EvalValue, LeftZeroSimplification,     RightZeroSimplification,
+//OPERATOR(operation, latex_output, EvalValue, LeftZeroSimplification,     RightZeroSimplification,
 //                                               LeftOneSimplification,      RightOneSimplification,
 //                                               LeftMinusOneSimplification, RightMinusOneSimplification,
 //                                               Differentiated)
 
-OPERATOR(ADD, "+", {
+OPERATOR(ADD, {
+    WriteBinaryOperator(" + ");
+}, {
     EvalTwoArgsOperation(+);
 }, {
     (*simplifications_number)++;
@@ -16,7 +18,9 @@ OPERATOR(ADD, "+", {
 }
 )
 
-OPERATOR(SUB, "-", {
+OPERATOR(SUB, {
+    WriteBinaryOperator(" - ");
+}, {
     EvalTwoArgsOperation(-);
 }, {
     (*simplifications_number)++;
@@ -29,7 +33,9 @@ OPERATOR(SUB, "-", {
 }
 )
 
-OPERATOR(MUL, "*", {
+OPERATOR(MUL, {
+    WriteBinaryOperator(" \\cdot ");
+}, {
     EvalTwoArgsOperation(*);
 }, {
     (*simplifications_number)++;
@@ -48,7 +54,14 @@ OPERATOR(MUL, "*", {
 }
 )
 
-OPERATOR(DIV, "/", {
+OPERATOR(DIV, {
+    fprintf(latex_file, "\\frac{");
+    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);
+    fprintf(latex_file, "}");
+    fprintf(latex_file, "{");
+    if(node->right)  RecursiveWriteToLatex(tree, node->right, latex_file);
+    fprintf(latex_file, "}");
+}, {
     EvalTwoArgsOperation(/);
 }, {
     (*simplifications_number)++;
@@ -64,7 +77,12 @@ OPERATOR(DIV, "/", {
 }
 )
 
-OPERATOR(POW, "^", {
+OPERATOR(POW, {
+    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);
+    fprintf(latex_file, "^{");
+    if(node->right)  RecursiveWriteToLatex(tree, node->right, latex_file);
+    fprintf(latex_file, "}");
+}, {
     double result = 0;
     result = pow((*node)->left->value.data.double_value, (*node)->right->value.data.double_value);
     ReplaceNodes(tree, node, Num(result));
@@ -96,35 +114,46 @@ OPERATOR(POW, "^", {
 }
 )
 
-OPERATOR(SQRT, "sqrt", {
+OPERATOR(SQRT, {
+    WriteUnaryOperator("e^", "{", "}");
+}, {
     EvalFunction(sqrt);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
     diff_result = Mul(Div(Num(1), Mul(Num(2), CP(node->left))), D(CP(node->left)));
 }
 )
 
-OPERATOR(SIN, "sin", {
+OPERATOR(SIN, {
+    WriteUnaryOperator("\\sin", "(", ")");
+}, {
     EvalFunction(sin);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
     diff_result = Mul(Cos(CP(node->left)), D(CP(node->left)));
 }
 )
 
-OPERATOR(COS, "cos", {
+OPERATOR(COS, {
+    WriteUnaryOperator("\\cos", "(", ")");
+}, {
     EvalFunction(cos);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
     diff_result = Mul(Mul(Num(-1), Sin(CP(node->left))), D(CP(node->left)));
 }
 )
 
-OPERATOR(LN, "ln", {
+OPERATOR(LN, {
+    WriteUnaryOperator("\\ln", "(", ")");
+
+}, {
     EvalFunction(log);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
     diff_result = Mul(Div(Num(1), CP(node->left)), D(CP(node->left)));
 }
 )
 
-OPERATOR(EXP, "exp", {
+OPERATOR(EXP, {
+    WriteUnaryOperator("e^", "{", "}");
+}, {
     EvalFunction(exp);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
     diff_result = Mul(CP(node->left), D(CP(node->left)));
