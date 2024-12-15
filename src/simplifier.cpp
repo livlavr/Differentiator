@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "diff_definitions.h"
+#include "diff_dump_specializations.h"
+#include "simplifier.h"
+#include "diff_DSL.h"
+#include "latex_output.h"
+
 #include "diff.h"
 #include "tree.h"
 
@@ -10,9 +16,9 @@ TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     FILE* latex_file = fopen("Latex/diff.tex", "a");
 
     PrintPhrase(latex_file, simplify_latex_beginning, simplify_latex_beginning_size);
-    fprintf(latex_file, "$");
+    fprintf(latex_file, "$$");
     RecursiveWriteToLatex(tree, tree->root, latex_file);
-    fprintf(latex_file, "$\\\\\n");
+    fprintf(latex_file, "$$\\\\\n");
 
     do {
         simplifications_number = 0;
@@ -20,9 +26,9 @@ TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     }while(simplifications_number != 0);
 
     fprintf(latex_file, "\\textbf{После упрощения получаем:}\\\\\n");
-    fprintf(latex_file, "$");
+    fprintf(latex_file, "$$");
     RecursiveWriteToLatex(tree, tree->root, latex_file);
-    fprintf(latex_file, "$\\\\\n");
+    fprintf(latex_file, "$$\\\\\n");
 
     fclose(latex_file);
 

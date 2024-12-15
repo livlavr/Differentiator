@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "diff_definitions.h"
+#include "diff_tree_specializations.h"
+#include "latex_output.h"
+
 #include "diff.h"
 #include "tree.h"
 

@@ -10,10 +10,6 @@ static const char*  operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "co
 static const char   variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
 static const double EPS = 1e-5;
 
-enum DifferentiatorError {
-
-};
-
 enum NodeType{
     number    = 0,
     variable  = 1,
@@ -46,8 +42,7 @@ struct DifferentiatorValue{
 };
 
 TreeNode<DifferentiatorValue>* CreateDiffNode(DifferentiatorValue diff_value,
-                 TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>* right);
-
+                TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>* right);
 TYPE_OF_ERROR DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value);
 
 #endif

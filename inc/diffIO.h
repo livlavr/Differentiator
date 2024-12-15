@@ -1,19 +1,17 @@
 #ifndef DIFFIO_H_
 #define DIFFIO_H_
 
-#include "diff.h"
-
-TreeNode<DifferentiatorValue>* GetG(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetE(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetT(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetV(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetN(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetP(const char* s, size_t* p);
-TreeNode<DifferentiatorValue>* GetF(const char* s, size_t* p);
-Operations ScanOperation           (const char* s, size_t* p);
-void       SkipSpaces              (const char* s, size_t* p);
-void       SyntaxError             (int line                );
+TreeNode<DifferentiatorValue>* GetEquation   (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetPlusMinus  (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetMulDiv     (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetPow        (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetVariable   (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetNumber     (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetBracket    (const char* s, size_t* p);
+TreeNode<DifferentiatorValue>* GetFunction   (const char* s, size_t* p);
+Operations                     ScanOperation (const char* s, size_t* p);
+void                           SkipSpaces    (const char* s, size_t* p);
+void                           SyntaxError   (int line                );
 
 #define IsSqrt(op) if(strcmp(op, operation_symbol[SQRT]) == 0) return SQRT
 #define IsSin( op) if(strcmp(op, operation_symbol[SIN ]) == 0) return SIN

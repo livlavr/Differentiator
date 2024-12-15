@@ -1,15 +1,5 @@
-#include <stdlib.h>
-#include <string.h>
-
-#include "custom_asserts.h"
-#include "tree.h"
-#include "diff.h"
-
-
 #ifndef DIFF_TREE_SPECIALIZATIONS_H_
 #define DIFF_TREE_SPECIALIZATIONS_H_
-
-//FUNCTION DECLARATION-----------------------------------------------------------------------
 
 template <>
 inline TreeErrors TreeInit<DifferentiatorValue>(Tree<DifferentiatorValue>* tree, const DifferentiatorValue* diff_value) {

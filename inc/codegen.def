@@ -1,7 +1,7 @@
 //OPERATOR(operation, latex_output, EvalValue, LeftZeroSimplification,     RightZeroSimplification,
-//                                               LeftOneSimplification,      RightOneSimplification,
-//                                               LeftMinusOneSimplification, RightMinusOneSimplification,
-//                                               Differentiated)
+//                                             LeftOneSimplification,      RightOneSimplification,
+//                                             LeftMinusOneSimplification, RightMinusOneSimplification,
+//                                             Differentiated)
 
 OPERATOR(ADD, {
     WriteBinaryOperator(" + ");
@@ -115,7 +115,7 @@ OPERATOR(POW, {
 )
 
 OPERATOR(SQRT, {
-    WriteUnaryOperator("e^", "{", "}");
+    WriteUnaryOperator("\\sqrt", "{", "}");
 }, {
     EvalFunction(sqrt);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {

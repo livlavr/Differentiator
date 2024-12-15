@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1734245583.99779 "/Users/ivanlavruschev/Education/Ded32/Differentiator/Latex/diff.tex" "diff.pdf" "diff" 1734245584.59169 0
-  "/Users/ivanlavruschev/Education/Ded32/Differentiator/Latex/diff.tex" 1734245582.80168 3144 1d45dd2f8ae1c8ac2c4be4ad7c2e7163 ""
+["pdflatex"] 1734287403.06294 "/Users/ivanlavruschev/Education/Ded32/Differentiator/Latex/diff.tex" "diff.pdf" "diff" 1734287403.65923 0
+  "/Users/ivanlavruschev/Education/Ded32/Differentiator/Latex/diff.tex" 1734287401.58788 3402 51c1478fc3d0cfa967838c882f77c841 ""
   "/Users/ivanlavruschev/Library/texlive/2024/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1725404399.40791 3308 eee81981029f67083258db36df06e523 ""
   "/Users/ivanlavruschev/Library/texlive/2024/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1725404397.14924 3304 6a543c07045572737981351171e0505e ""
   "/Users/ivanlavruschev/Library/texlive/2024/texmf-var/fonts/tfm/lh/lh-t2a/labx1728.tfm" 1727544390.32377 3312 d199be9bd555944e2403193d58a0256a ""
@@ -29,7 +29,6 @@
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1248133631 36741 fa121aac0049305630cf160b86157ee4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
-  "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb" 1215737283 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
@@ -147,9 +146,9 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1725290754.21018 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1725290694 8221447 42e4de9dccb6772b6253803798853884 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "diff.aux" 1734245584.50991 2291 536b88dfad26dea40e44a3616c5c4283 "pdflatex"
-  "diff.tex" 1734245582.80168 3144 1d45dd2f8ae1c8ac2c4be4ad7c2e7163 ""
-  "diff.toc" 1734245584.51079 1615 adf380ff60aa2b113139d1b9887c9275 "pdflatex"
+  "diff.aux" 1734287403.57785 2771 35d4360f755c3b6922eb151d3eae8da9 "pdflatex"
+  "diff.tex" 1734287401.58788 3402 51c1478fc3d0cfa967838c882f77c841 ""
+  "diff.toc" 1734287403.57877 1972 90aaa57e9fcc24eedc10a6c5a4bdf939 "pdflatex"
   (generated)
   "diff.aux"
   "diff.log"

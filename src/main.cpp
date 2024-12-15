@@ -1,16 +1,23 @@
 #include <stdio.h>
 #include <cmath>
 
+#include "tree.h"
+#include "tree_dump.h"
+#include "diff_definitions.h"
+#include "diff_dump_specializations.h"
+#include "diff_tree_specializations.h"
+#include "simplifier.h"
+#include "diffIO.h"
+#include "latex_output.h"
 #include "diff.h"
 
 int main() {
-    // sin(15*x^3) + cos(20*x)^3
     // cos(15*x^3)*45*x^2 - 3*cos(20*x)^2*20*sin(20^x)
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
     DiffTreeInit(&tree, {});
     BeginLatexFile();
-    ReplaceNodes(&tree, &(tree.root), GetG("sin(15*x^3) + cos(20*x)^3", &p));
+    ReplaceNodes(&tree, &(tree.root), GetEquation("-x + 4 * (-sin(-x + y))", &p));
     TreeDump(&tree);
     SimplifyTree(&tree);
     TreeDump(&tree);

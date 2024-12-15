@@ -2,11 +2,8 @@
 #define DIFF_DUMP_SPECIALIZATIONS_H_
 
 #include "tree.h"
-#include "tree_dump.h"
-#include "diff.h"
-#include "debug_macros.h"
+#include "diff_definitions.h"
 
-// TODO PrintNode
 #define _WriteOperationDescriptionToStream()                                                                                                          \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
           "label=\" {Node = [ %p ] | Parent = [ %p ] |"                                                                          \

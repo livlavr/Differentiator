@@ -4,12 +4,16 @@
 
 #include "tree.h"
 #include "color_printf.h"
+#include "diff_definitions.h"
+#include "diff_DSL.h"
+#include "diffIO.h"
 #include "diff.h"
+#include "debug_macros.h"
 
-TreeNode<DifferentiatorValue>* GetG(const char* s, size_t* p) { //TODO rename
+TreeNode<DifferentiatorValue>* GetEquation(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
-    TreeNode<DifferentiatorValue>* val = GetE(s, p);
+    TreeNode<DifferentiatorValue>* val = GetPlusMinus(s, p);
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     if(s[*p] != '\0')
@@ -17,10 +21,10 @@ TreeNode<DifferentiatorValue>* GetG(const char* s, size_t* p) { //TODO rename
     return val;
 }
 
-TreeNode<DifferentiatorValue>* GetE(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetPlusMinus(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
-    TreeNode<DifferentiatorValue>* val1   = GetT(s, p);
+    TreeNode<DifferentiatorValue>* val1   = GetMulDiv(s, p);
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
@@ -29,7 +33,7 @@ TreeNode<DifferentiatorValue>* GetE(const char* s, size_t* p) {
     while (s[*p] == '+' || s[*p] == '-') {
         int op = s[*p];
         (*p)++;
-        val2 = GetE(s, p);
+        val2 = GetPlusMinus(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         if(op == '+') result = Add(val1, val2);
@@ -39,10 +43,10 @@ TreeNode<DifferentiatorValue>* GetE(const char* s, size_t* p) {
     return result;
 }
 
-TreeNode<DifferentiatorValue>* GetT(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetMulDiv(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
-    TreeNode<DifferentiatorValue>* val1   = GetD(s, p);
+    TreeNode<DifferentiatorValue>* val1   = GetPow(s, p);
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
@@ -51,7 +55,7 @@ TreeNode<DifferentiatorValue>* GetT(const char* s, size_t* p) {
     while (s[*p] == '*' || s[*p] == '/') {
         int op = s[*p];
         (*p)++;
-        val2  = GetT(s, p);
+        val2  = GetMulDiv(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         if(op == '*') result = Mul(val1, val2);
@@ -61,10 +65,10 @@ TreeNode<DifferentiatorValue>* GetT(const char* s, size_t* p) {
     return result;
 }
 
-TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetPow(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
-    TreeNode<DifferentiatorValue>* val1   = GetP(s, p);
+    TreeNode<DifferentiatorValue>* val1   = GetBracket(s, p);
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
@@ -72,7 +76,7 @@ TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p) {
 
     while (s[*p] == '^') {
         (*p)++;
-        val2   = GetD(s, p);
+        val2   = GetPow(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         result = Pow(val1, val2);
@@ -81,92 +85,167 @@ TreeNode<DifferentiatorValue>* GetD(const char* s, size_t* p) {
     return result;
 }
 
-TreeNode<DifferentiatorValue>* GetP(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetBracket(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     SkipSpaces(s, p);
+    int sign = 1;
+    if(s[*p] == '-') {
+        sign = -1;
+        (*p)++;
+    }
     if(s[*p] == '('){
         (*p)++;
         SkipSpaces(s, p);
-        TreeNode<DifferentiatorValue>* val = GetE(s, p);
+        TreeNode<DifferentiatorValue>* val = GetPlusMinus(s, p);
         $DEBUG("%s", __func__);
         $DEBUG("%c", s[*p]);
         if(s[*p] != ')')
             SyntaxError(__LINE__);
         (*p)++;
         SkipSpaces(s, p);
+        if(!sign) {
+            return Mul(Num(-1), val);
+        }
         return val;
     }
     else
-        return GetF(s, p);
+        if(sign == -1) (*p)--;
+        return GetFunction(s, p);
 }
 
-TreeNode<DifferentiatorValue>* GetF(const char* s, size_t* p) {
+TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
     size_t start = *p;
     double amount = 0;
+    int    sign   = 1;
+    if(s[*p] == '-') {
+        sign = -1;
+        (*p)++;
+    }
     Operations op = ScanOperation(s, p);
     TreeNode<DifferentiatorValue>* val = NULL;
     (*p)++;
     SkipSpaces(s, p);
     switch(op) {
         case SQRT:
-            val = GetE(s, p);
+            val = GetPlusMinus(s, p);
             $DEBUG("%s", __func__);
             $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
             SkipSpaces(s, p);
+            if(sign == -1) {
+                return Mul(Num(-1), Sqrt(val));
+            }
             return Sqrt(val);
 
         case SIN:
-            val = GetE(s, p);
+            val = GetPlusMinus(s, p);
             $DEBUG("%s", __func__);
             $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
             SkipSpaces(s, p);
+            if(sign == -1) {
+                return Mul(Num(-1), Sin(val));
+            }
             return Sin(val);
 
         case COS:
-            val = GetE(s, p);
+            val = GetPlusMinus(s, p);
             $DEBUG("%s", __func__);
             $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
             SkipSpaces(s, p);
+            if(sign == -1) {
+                return Mul(Num(-1), Cos(val));
+            }
             return Cos(val);
 
         case LN:
-            val = GetE(s, p);
+            val = GetPlusMinus(s, p);
             $DEBUG("%s", __func__);
             $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
             SkipSpaces(s, p);
+            if(sign == -1) {
+                return Mul(Num(-1), Ln(val));
+            }
             return Ln(val);
 
         case EXP:
-            val = GetE(s, p);
+            val = GetPlusMinus(s, p);
             $DEBUG("%s", __func__);
             $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
             SkipSpaces(s, p);
+            if(sign == -1) {
+                return Mul(Num(-1), Exp(val));
+            }
             return Exp(val);
 
         case UNDEF:
             *p = start;
-            return GetV(s, p);
+            return GetVariable(s, p);
         default:
             warning(false, PROGRAM_ERROR);
     }
+}
+
+TreeNode<DifferentiatorValue>* GetVariable(const char* s, size_t* p) {
+    $DEBUG("%s", __func__);
+    $DEBUG("%c", s[*p]);
+    size_t number_of_var = sizeof(variable_table);
+    int    sign   = 1;
+    if(s[*p] == '-') {
+        sign = -1;
+        (*p)++;
+    }
+    for(size_t variable_number = 0; variable_number < number_of_var; variable_number++) {
+        if(s[*p] == variable_table[variable_number]) {
+            (*p)++;
+            SkipSpaces(s, p);
+            $DEBUG("%d", variable_number);
+            if(sign == -1) {
+                return Mul(Num(-1), Var(variable_number));
+            }
+            return Var(variable_number);
+        }
+    }
+    if(sign == -1) (*p)--;
+    return GetNumber(s, p);
+}
+
+TreeNode<DifferentiatorValue>* GetNumber(const char* s, size_t* p) {
+    $DEBUG("%s", __func__);
+    $DEBUG("%c", s[*p]);
+    SkipSpaces(s, p);
+    double amount = 0;
+    size_t start  = *p;
+    int    sign   = 1;
+    if(s[*p] == '-') {
+        sign = -1;
+        (*p)++;
+    }
+    while('0' <= s[*p] && s[*p] <= '9') {
+        amount = amount * 10 + (s[*p] - '0');
+        (*p)++;
+    }
+    if(start == *p)
+        SyntaxError(__LINE__);
+    SkipSpaces(s, p);
+    amount *= sign;
+    return Num(amount);
 }
 
 Operations ScanOperation(const char* s, size_t* p) {
@@ -185,38 +264,6 @@ Operations ScanOperation(const char* s, size_t* p) {
     DetectOperation(operation);
 }
 
-TreeNode<DifferentiatorValue>* GetV(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
-    size_t number_of_var = sizeof(variable_table);
-    for(size_t variable_number = 0; variable_number < number_of_var; variable_number++) {
-        if(s[*p] == variable_table[variable_number]) {
-            (*p)++;
-            SkipSpaces(s, p);
-            $DEBUG("%d", variable_number);
-            return Var(variable_number);
-        }
-    }
-
-    return GetN(s, p);
-}
-
-TreeNode<DifferentiatorValue>* GetN(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
-    SkipSpaces(s, p);
-    double amount = 0;
-    size_t start  = *p;
-    while('0' <= s[*p] && s[*p] <= '9') {
-        amount = amount * 10 + (s[*p] - '0');
-        (*p)++;
-    }
-    if(start == *p)
-        SyntaxError(__LINE__);
-    SkipSpaces(s, p);
-    return Num(amount);
-}
-
 void SyntaxError(int line){
     color_printf(RED_COLOR, BOLD, "BRUUUUH Syntax Error in %d\n", line);
     exit(0);
@@ -227,118 +274,3 @@ void SkipSpaces(const char* s, size_t* p) {
         (*p)++;
     };
 }
-
-
-// Operations ScanOperation(const char* s, size_t* p) {
-//     SkipSpaces(s, p);
-//     char       operation[6] = "";
-//     size_t     op_index     = 0;
-//     Operations op;
-//     while(s[*p] != '(' && op_index < 6) {
-//         operation[op_index] = s[*p];
-//         (*p)++;
-//         SkipSpaces(s, p);
-//         op_index++;
-//     }
-//     operation[op_index + 1] = '\0';
-//     if (s[*p] != '(')
-//         SyntaxError(__LINE__);
-//     DetectOperation(operation);
-// }
-
-// #include <stdio.h>
-//
-// #include "tree.h"
-// #include "diff.h"
-// #include "color_printf.h"
-//
-// int  GetG        (const char* s, size_t* p);
-// int  GetE        (const char* s, size_t* p);
-// int  GetT        (const char* s, size_t* p);
-// int  GetN        (const char* s, size_t* p);
-// int  GetP        (const char* s, size_t* p);
-// void SkipSpaces  (const char* s, size_t* p);
-// void SyntaxError (int line                );
-//
-// const char* s = "";
-//
-// int main() {
-//     size_t p = 0;
-//     printf("%d", GetG(s, &p));
-// }
-//
-// int GetG(const char* s, size_t* p) {
-//     int val = GetE(s, p);
-//     if(s[*p] != '\0')
-//         SyntaxError(__LINE__);
-//     (*p)++;
-//     return val;
-// }
-//
-// int GetE(const char* s, size_t* p) {
-//     int val = GetT(s, p);
-//     while (s[*p] == '+' || s[*p] == '-') {
-//         int op = s[*p];
-//         (*p)++;
-//         int val2 = GetT(s, p);
-//         if(op == '+') val += val2;
-//         else          val -= val2;
-//     }
-//     SkipSpaces(s, p);
-//     return val;
-// }
-//
-// int GetT(const char* s, size_t* p) {
-//     int val = GetP(s, p);
-//     while (s[*p] == '*' || s[*p] == '/') {
-//         int op = s[*p];
-//         (*p)++;
-//         int val2 = GetP(s, p);
-//         if(op == '*') val *= val2;
-//         else          val /= val2;
-//     }
-//     SkipSpaces(s, p);
-//     return val;
-// }
-//
-// int GetP(const char* s, size_t* p) {
-//     SkipSpaces(s, p);
-//     if(s[*p] == '('){
-//         (*p)++;
-//         SkipSpaces(s, p);
-//         int val = GetE(s, p);
-//         if(s[*p] != ')')
-//             SyntaxError(__LINE__);
-//         (*p)++;
-//         SkipSpaces(s, p);
-//         return val;
-//     }
-//     else
-//         return GetN(s, p);
-// }
-//
-// int GetN(const char* s, size_t* p) {
-//     SkipSpaces(s, p);
-//     int    val   = 0;
-//     size_t start = *p;
-//     while('0' <= s[*p] && s[*p] <= '9') {
-//         val = val*10 + (s[*p] - '0');
-//         (*p)++;
-//         SkipSpaces(s, p);
-//     }
-//     if(start == *p)
-//         SyntaxError(__LINE__);
-//     SkipSpaces(s, p);
-//     return val;
-// }
-//
-// void SyntaxError(int line){
-//     color_printf(RED_COLOR, BOLD, "BRUUUUH Syntax Error in %d\n", line);
-//     exit(0);
-// }
-//
-// void SkipSpaces(const char* s, size_t* p) {
-//     while(s[*p] == ' ') {
-//         (*p)++;
-//     };
-// }

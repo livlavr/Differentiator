@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+#include "diff_definitions.h"
 #include "diff.h"
+#include "simplifier.h"
 #include "tree.h"
 
 static const int ROOT_NODE = 0;

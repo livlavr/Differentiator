@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+#include "diff_definitions.h"
+#include "diff_tree_specializations.h"
+#include "simplifier.h"
+#include "diff_DSL.h"
+#include "latex_output.h"
 #include "diff.h"
 #include "tree.h"
 
@@ -27,14 +32,14 @@ TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorVal
     if(node->value.type == variable) {
         diff_result = Num(1);
         PrintPhrase(latex_file, phrases, phrases_size);
-        WriteStepToLatex(node, "$(", ")'");
-        WriteStepToLatex(diff_result, " = ", "$\n");
+        WriteStepToLatex(node, "$$(", ")'");
+        WriteStepToLatex(diff_result, " = ", "$$\n");
     }
     else if(node->value.type == number) {
         diff_result = Num(0);
         PrintPhrase(latex_file, phrases, phrases_size);
-        WriteStepToLatex(node, "$(", ")'");
-        WriteStepToLatex(diff_result, " = ", "$\n");
+        WriteStepToLatex(node, "$$(", ")'");
+        WriteStepToLatex(diff_result, " = ", "$$\n");
     }
 
     #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,\
@@ -44,8 +49,8 @@ TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorVal
         if(node->value.type == operation && node->value.data.operation == OP) {\
             DIFFERENTIATED;\
             PrintPhrase(latex_file, phrases, phrases_size);\
-            WriteStepToLatex(node, "$(", ")'");\
-            WriteStepToLatex(diff_result, " = ", "$\n");\
+            WriteStepToLatex(node, "$$(", ")'");\
+            WriteStepToLatex(diff_result, " = ", "$$\n");\
         }
 
     #include "codegen.def"
