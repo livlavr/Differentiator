@@ -14,5 +14,4 @@
 \contentsline {subsection}{\numberline {2.11}Продавец пятерочки запросто продифференцирует данное выражение}{3}{}%
 \contentsline {subsection}{\numberline {2.12}АААААААААААААА заебло}{3}{}%
 \contentsline {subsection}{\numberline {2.13}Что бы посчитать такое... великое}{3}{}%
-\contentsline {subsection}{\numberline {2.14}Задачка для советских яслей}{3}{}%
 \contentsline {section}{\numberline {3}Хмм, как бы здесь изъебнуться}{3}{}%

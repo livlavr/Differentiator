@@ -14,9 +14,7 @@ TYPE_OF_ERROR DerivateTree(Tree<DifferentiatorValue>* tree) {
     FILE* latex_file = fopen("Latex/diff.tex", "a");
     PrintPhrase(latex_file, derivation_latex_beginning, derivation_latex_beginning_size);
 
-    Tree<DifferentiatorValue> derivated_tree = {};
-    DiffTreeInit(&derivated_tree, {});
-    ReplaceNodes(tree, &(derivated_tree.root), RecursiveSubtreeDerivation(tree, tree->root, latex_file));
+    ReplaceNodes(tree, &(tree->root), RecursiveSubtreeDerivation(tree, tree->root, latex_file));
 
     fclose(latex_file);
 

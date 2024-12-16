@@ -92,7 +92,6 @@ static const char* phrases[] = {
     "\\subsection{Не ну что это за рукоблудие}\n"
 };
 
-static int latex_begining_size             = sizeof(latex_begining)/sizeof(latex_begining[0]);
 static int simplify_latex_beginning_size   = sizeof(simplify_latex_beginning)/sizeof(simplify_latex_beginning[0]);
 static int derivation_latex_beginning_size = sizeof(derivation_latex_beginning)/sizeof(derivation_latex_beginning[0]);
 static int latex_ending_size               = sizeof(latex_ending)/sizeof(latex_ending[0]);

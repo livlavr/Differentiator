@@ -9,7 +9,7 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node);
 
 #define ReplaceSubtree(side, new_node)\
     TreeNode<DifferentiatorValue>* parent_node = (*node_before)->parent;\
-    DestroySubtree(node_before);\
+    DestroySubtree<DifferentiatorValue>(node_before);\
     LinkNodes(parent_node, new_node, side)
 
 #define EvalTwoArgsOperation(operation) \

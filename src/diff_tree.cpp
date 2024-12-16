@@ -36,7 +36,7 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node) 
                    CopySubtree(node->left), CopySubtree(node->right));
 }
 
-TYPE_OF_ERROR ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
+TYPE_OF_ERROR   ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
                            TreeNode<DifferentiatorValue>* node_after) {
     check_expression(*node_before, POINTER_IS_NULL);
     check_expression(node_after,   POINTER_IS_NULL);

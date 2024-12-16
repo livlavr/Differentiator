@@ -12,12 +12,12 @@
 #include "diff.h"
 
 int main() {
-    // cos(15*x^3)*45*x^2 - 3*cos(20*x)^2*20*sin(20^x)
+    // // cos(15*x^3)*45*x^2 - 3*cos(20*x)^2*20*sin(20^x)
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
     DiffTreeInit(&tree, {});
     BeginLatexFile();
-    ReplaceNodes(&tree, &(tree.root), GetEquation("-x + 4 * (-sin(-x + y))", &p));
+    ReplaceNodes(&tree, &(tree.root), GetEquation("3*cos(20*x)^2*20*sin(20^x)", &p));
     TreeDump(&tree);
     SimplifyTree(&tree);
     TreeDump(&tree);
@@ -25,5 +25,6 @@ int main() {
     TreeDump(&tree);
     SimplifyTree(&tree);
     EndLatexFile();
+    OpenDump(&tree);
     TreeDtor(&tree);
 }
