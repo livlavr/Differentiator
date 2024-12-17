@@ -8,13 +8,13 @@ OPERATOR(ADD, {
 }, {
     EvalTwoArgsOperation(+);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->right);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->left);
 }, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Add(D(CP(node->left)), D(CP(node->right)));
+    diff_result = Add(D(CP(LEFT)), D(CP(RIGHT)));
 }
 )
 
@@ -23,13 +23,13 @@ OPERATOR(SUB, {
 }, {
     EvalTwoArgsOperation(-);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Mul(Num(-1), CP((*node)->right)));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->left);
 }, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Sub(D(CP(node->left)), D(CP(node->right)));
+    diff_result = Sub(D(CP(LEFT)), D(CP(RIGHT)));
 }
 )
 
@@ -38,78 +38,78 @@ OPERATOR(MUL, {
 }, {
     EvalTwoArgsOperation(*);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(0));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(0));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->right);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->left);
 }, {{}}, {{}}, {
-    diff_result = Add(Mul(D(CP(node->left)), CP(node->right)), Mul(CP(node->left), D(CP(node->right))));
+    diff_result = Add(Mul(D(CP(LEFT)), CP(RIGHT)), Mul(CP(LEFT), D(CP(RIGHT))));
 }
 )
 
 OPERATOR(DIV, {
     fprintf(latex_file, "\\frac{");
-    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);
+    if(LEFT)  RecursiveWriteToLatex(tree, LEFT, latex_file);
     fprintf(latex_file, "}");
     fprintf(latex_file, "{");
-    if(node->right)  RecursiveWriteToLatex(tree, node->right, latex_file);
+    if(RIGHT)  RecursiveWriteToLatex(tree, RIGHT, latex_file);
     fprintf(latex_file, "}");
 }, {
     EvalTwoArgsOperation(/);
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(0));
 }, {{}}, {{}}, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->left);
 }, {{}}, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Mul(Num(-1), CP((*node)->left)));
 }, {
-    diff_result = Div(Sub(Mul(D(CP(node->left)), CP(node->right)), Mul(CP(node->left), D(CP(node->left)))), Pow(CP(node->right), Num(2)));
+    diff_result = Div(Sub(Mul(D(CP(LEFT)), CP(RIGHT)), Mul(CP(LEFT), D(CP(LEFT)))), Pow(CP(RIGHT), Num(2)));
 }
 )
 
 OPERATOR(POW, {
-    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);
+    if(LEFT)  RecursiveWriteToLatex(tree, LEFT, latex_file);
     fprintf(latex_file, "^{");
-    if(node->right)  RecursiveWriteToLatex(tree, node->right, latex_file);
+    if(RIGHT)  RecursiveWriteToLatex(tree, RIGHT, latex_file);
     fprintf(latex_file, "}");
 }, {
     double result = 0;
-    result = pow((*node)->left->value.data.double_value, (*node)->right->value.data.double_value);
+    result = pow(GetValue(left), GetValue(right));
     ReplaceNodes(tree, node, Num(result));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(0));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(1));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Num(1));
 }, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, (*node)->left);
 }, {{}}, {
-    (*simplifications_number)++;
+    I_MADE_CHANGES;
     ReplaceNodes(tree, node, Div(Num(1), CP((*node)->left)));
 }, {
-    if(node->right->value.type == number) {
-        diff_result = Mul(Mul(CP(node->right), Pow(CP(node->left), Sub(CP(node->right), Num(1)))), D(CP(node->left)));
+    if(RIGHT->value.type == number) {
+        diff_result = Mul(Mul(CP(RIGHT), Pow(CP(LEFT), Sub(CP(RIGHT), Num(1)))), D(CP(LEFT)));
     }
-    else if(node->left->value.type == number) {
-        diff_result = Mul(Mul(CP(node), Ln(CP(node->left))), D(CP(node->right)));
+    else if(LEFT->value.type == number) {
+        diff_result = Mul(Mul(CP(node), Ln(CP(LEFT))), D(CP(RIGHT)));
     }
     else {
-        diff_result = D(Pow((Num(exp(1))), Mul(CP(node->right), Ln(CP(node->left)))));
+        diff_result = D(Pow((Num(exp(1))), Mul(CP(RIGHT), Ln(CP(LEFT)))));
     }
 }
 )
@@ -119,7 +119,7 @@ OPERATOR(SQRT, {
 }, {
     EvalFunction(sqrt);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Mul(Div(Num(1), Mul(Num(2), CP(node->left))), D(CP(node->left)));
+    diff_result = Mul(Div(Num(1), Mul(Num(2), CP(LEFT))), D(CP(LEFT)));
 }
 )
 
@@ -128,7 +128,7 @@ OPERATOR(SIN, {
 }, {
     EvalFunction(sin);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Mul(Cos(CP(node->left)), D(CP(node->left)));
+    diff_result = Mul(Cos(CP(LEFT)), D(CP(LEFT)));
 }
 )
 
@@ -137,7 +137,7 @@ OPERATOR(COS, {
 }, {
     EvalFunction(cos);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Mul(Mul(Num(-1), Sin(CP(node->left))), D(CP(node->left)));
+    diff_result = Mul(Mul(Num(-1), Sin(CP(LEFT))), D(CP(LEFT)));
 }
 )
 
@@ -147,7 +147,7 @@ OPERATOR(LN, {
 }, {
     EvalFunction(log);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Mul(Div(Num(1), CP(node->left)), D(CP(node->left)));
+    diff_result = Mul(Div(Num(1), CP(LEFT)), D(CP(LEFT)));
 }
 )
 
@@ -156,6 +156,6 @@ OPERATOR(EXP, {
 }, {
     EvalFunction(exp);
 }, {{}}, {{}}, {{}}, {{}}, {{}}, {{}}, {
-    diff_result = Mul(CP(node->left), D(CP(node->left)));
+    diff_result = Mul(CP(LEFT), D(CP(LEFT)));
 }
 )

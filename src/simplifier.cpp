@@ -43,49 +43,41 @@ TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<Di
     RecursiveSimplifyTree(tree, &(*node)->left,  simplifications_number, latex_file);
     RecursiveSimplifyTree(tree, &(*node)->right, simplifications_number, latex_file);
 
-    #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,\
-                                              LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,\
-                                              LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION,\
-                                              ...)\
-        if((*node)->value.type == operation && (*node)->value.data.operation == OP) {\
-            if((*node)->right) {\
-                if((*node)->left->value.type == number) {\
-                    if((*node)->right->value.type == number) {\
-                        EVAL_VALUE;\
-                        TreeDump(tree);\
-                    }\
-                    else if(IsEqual((*node)->left->value.data.double_value,  0, EPS)) {\
-                        LEFT_ZERO_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                    else if(IsEqual((*node)->left->value.data.double_value,  1, EPS)) {\
-                        LEFT_ONE_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                    else if(IsEqual((*node)->left->value.data.double_value, -1, EPS)) {\
-                        LEFT_MINUS_ONE_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                }\
-                else if((*node)->right->value.type == number) {\
-                    if(IsEqual((*node)->right->value.data.double_value,       0, EPS)) {\
-                        RIGHT_ZERO_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                    else if(IsEqual((*node)->right->value.data.double_value,  1, EPS)) {\
-                        RIGHT_ONE_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                    else if(IsEqual((*node)->right->value.data.double_value, -1, EPS)) {\
-                        RIGHT_MINUS_ONE_SIMPLIFICATION;\
-                        TreeDump(tree);\
-                    }\
-                }\
-            }\
-            else if((*node)->left->value.type == number) {\
-                EVAL_VALUE;\
-                TreeDump(tree);\
-            }\
+    #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,     \
+                                                   LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,      \
+                                                   LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION,\
+                                                   ...)                                                          \
+        if(IsOperation(OP)) {                                                                                    \
+            if((*node)->right) {                                                                                 \
+                if(IsNumber(left)) {                                                                             \
+                    if(IsNumber(right)) {                                                                        \
+                        EVAL_VALUE;                                                                              \
+                    }                                                                                            \
+                    else if(IsEqual(GetValue(left),   0, EPS)) {                                                 \
+                        LEFT_ZERO_SIMPLIFICATION;                                                                \
+                    }                                                                                            \
+                    else if(IsEqual(GetValue(left),   1, EPS)) {                                                 \
+                        LEFT_ONE_SIMPLIFICATION;                                                                 \
+                    }                                                                                            \
+                    else if(IsEqual(GetValue(left),  -1, EPS)) {                                                 \
+                        LEFT_MINUS_ONE_SIMPLIFICATION;                                                           \
+                    }                                                                                            \
+                }                                                                                                \
+                else if(IsNumber(right)) {                                                                       \
+                    if(IsEqual(GetValue(right),       0, EPS)) {                                                 \
+                        RIGHT_ZERO_SIMPLIFICATION;                                                               \
+                    }                                                                                            \
+                    else if(IsEqual(GetValue(right),  1, EPS)) {                                                 \
+                        RIGHT_ONE_SIMPLIFICATION;                                                                \
+                    }                                                                                            \
+                    else if(IsEqual(GetValue(right), -1, EPS)) {                                                 \
+                        RIGHT_MINUS_ONE_SIMPLIFICATION;                                                          \
+                    }                                                                                            \
+                }                                                                                                \
+            }                                                                                                    \
+            else if(IsNumber(left)) {                                                                            \
+                EVAL_VALUE;                                                                                      \
+            }                                                                                                    \
         }
 
     #include "codegen.def"

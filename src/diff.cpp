@@ -29,26 +29,20 @@ TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorVal
 
     if(node->value.type == variable) {
         diff_result = Num(1);
-        PrintPhrase(latex_file, phrases, phrases_size);
-        WriteStepToLatex(node, "$$(", ")'");
-        WriteStepToLatex(diff_result, " = ", "$$\n");
+        LatexOutput();
     }
     else if(node->value.type == number) {
         diff_result = Num(0);
-        PrintPhrase(latex_file, phrases, phrases_size);
-        WriteStepToLatex(node, "$$(", ")'");
-        WriteStepToLatex(diff_result, " = ", "$$\n");
+        LatexOutput();
     }
 
-    #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,\
-                                              LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,\
-                                              LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION,\
-                                              DIFFERENTIATED)\
-        if(node->value.type == operation && node->value.data.operation == OP) {\
-            DIFFERENTIATED;\
-            PrintPhrase(latex_file, phrases, phrases_size);\
-            WriteStepToLatex(node, "$$(", ")'");\
-            WriteStepToLatex(diff_result, " = ", "$$\n");\
+    #define OPERATOR(OP, LATEX_OUTPUT, EVAL_VALUE, LEFT_ZERO_SIMPLIFICATION,      RIGHT_ZERO_SIMPLIFICATION,      \
+                                                   LEFT_ONE_SIMPLIFICATION,       RIGHT_ONE_SIMPLIFICATION,       \
+                                                   LEFT_MINUS_ONE_SIMPLIFICATION, RIGHT_MINUS_ONE_SIMPLIFICATION, \
+                                                   DIFFERENTIATED)                                                \
+        if(node->value.type == operation && node->value.data.operation == OP) {                                   \
+            DIFFERENTIATED;                                                                                       \
+            LatexOutput();                                                                                        \
         }
 
     #include "codegen.def"

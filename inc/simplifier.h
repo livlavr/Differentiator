@@ -22,6 +22,15 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node);
     result = function((*node)->left->value.data.double_value);\
     ReplaceNodes(tree, node, Num(result))
 
+#define IsOperation(OP)\
+    (*node)->value.type == operation && (*node)->value.data.operation == OP
+
+#define IsNumber(side)\
+    (*node)->side->value.type == number
+
+#define GetValue(side)\
+    (*node)->side->value.data.double_value
+
 #define  D(x) RecursiveSubtreeDerivation(tree, x, latex_file)
 
 #define CP(x) CopySubtree(x)

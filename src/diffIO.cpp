@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define NDEBUG
+// #define NDEBUG
 
 #include "tree.h"
 #include "color_printf.h"
@@ -16,7 +16,7 @@ TreeNode<DifferentiatorValue>* GetEquation(const char* s, size_t* p) {
     TreeNode<DifferentiatorValue>* val = GetPlusMinus(s, p);
     $DEBUG("%s", __func__);
     $DEBUG("%c", s[*p]);
-    if(s[*p] != '\0')
+    if(s[*p] != '\0' && s[*p] != '\n')
         SyntaxError(__LINE__);
     return val;
 }

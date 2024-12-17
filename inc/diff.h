@@ -11,4 +11,13 @@ TreeNode<DifferentiatorValue>* RecursiveSubtreeDerivation(Tree<DifferentiatorVal
     #define WriteIfDebug(expression)
 #endif
 
+#define RIGHT\
+    node->right
+
+#define LEFT\
+    node->left
+
+#define I_MADE_CHANGES\
+    (*simplifications_number)++
+
 #endif

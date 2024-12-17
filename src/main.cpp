@@ -10,14 +10,16 @@
 #include "diffIO.h"
 #include "latex_output.h"
 #include "diff.h"
+#include "Buffer.h"
 
 int main() {
-    // // cos(15*x^3)*45*x^2 - 3*cos(20*x)^2*20*sin(20^x)
     size_t p = 0;
     Tree<DifferentiatorValue> tree = {};
     DiffTreeInit(&tree, {});
     BeginLatexFile();
-    ReplaceNodes(&tree, &(tree.root), GetEquation("3*cos(20*x)^2*20*sin(20^x)", &p));
+    Buffer<char> equation = {};
+    ReadFile(&equation, "Latex-source/DiffSource.txt");
+    ReplaceNodes(&tree, &(tree.root), GetEquation(equation.data, &p));
     TreeDump(&tree);
     SimplifyTree(&tree);
     TreeDump(&tree);
@@ -27,4 +29,5 @@ int main() {
     EndLatexFile();
     OpenDump(&tree);
     TreeDtor(&tree);
+    BufferDtor(&equation);
 }

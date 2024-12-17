@@ -1,37 +1,38 @@
 #ifndef LATEX_OUTPUT_H_
 #define LATEX_OUTPUT_H_
 
-static const char* latex_begining = "\\documentclass[12pt]{article}\n"
-                                    "\\usepackage[utf8]{inputenc}\n"
-                                    "\\usepackage[russian]{babel}\n"
-                                    "\\usepackage{xcolor}\n"
-                                    "\\usepackage{makecell}\n"
-                                    "\\usepackage{amsmath}\n"
-                                    "\\usepackage{amssymb}\n"
-                                    "\\usepackage{cancel}\n"
-                                    "\\usepackage{listings}\n"
-                                    "\\usepackage{tikz}\n"
-                                    "\\linespread{1.5}\n"
-                                    "\\definecolor{codegreen}{rgb}{0,0.6,0}\n"
-                                    "\\definecolor{codegray}{rgb}{0.5,0.5,0.5}\n"
-                                    "\\definecolor{codepurple}{rgb}{0.58,0,0.82}\n"
-                                    "\\definecolor{backcolour}{rgb}{0.95,0.95,0.92}\n"
-                                    "\\usepackage[\n"
-                                    "    ignoreheadfoot,\n"
-                                    "    top=2 cm,\n"
-                                    "    bottom=2 cm,\n"
-                                    "    left=2 cm,\n"
-                                    "    right=2 cm,\n"
-                                    "    footskip=1.0 cm,\n"
-                                    "]{geometry}\n"
-                                    "\\begin{document}\n"
-                                    "\\begingroup\n"
-                                    "    \\centering\n"
-                                    "    \\LARGE Дифференцирование\\\\\n"
-                                    "    \\large \\today \\\\[0.5em]\n"
-                                    "    \\large Лаврущев Иван Б05-431\\par\n"
-                                    "\\endgroup\n"
-                                    "\\tableofcontents\n";
+static const char* latex_begining = ""
+    "\\documentclass[12pt]{article}\n"
+    "\\usepackage[utf8]{inputenc}\n"
+    "\\usepackage[russian]{babel}\n"
+    "\\usepackage{xcolor}\n"
+    "\\usepackage{makecell}\n"
+    "\\usepackage{amsmath}\n"
+    "\\usepackage{amssymb}\n"
+    "\\usepackage{cancel}\n"
+    "\\usepackage{listings}\n"
+    "\\usepackage{tikz}\n"
+    "\\linespread{1.5}\n"
+    "\\definecolor{codegreen}{rgb}{0,0.6,0}\n"
+    "\\definecolor{codegray}{rgb}{0.5,0.5,0.5}\n"
+    "\\definecolor{codepurple}{rgb}{0.58,0,0.82}\n"
+    "\\definecolor{backcolour}{rgb}{0.95,0.95,0.92}\n"
+    "\\usepackage[\n"
+    "    ignoreheadfoot,\n"
+    "    top=2 cm,\n"
+    "    bottom=2 cm,\n"
+    "    left=2 cm,\n"
+    "    right=2 cm,\n"
+    "    footskip=1.0 cm,\n"
+    "]{geometry}\n"
+    "\\begin{document}\n"
+    "\\begingroup\n"
+    "    \\centering\n"
+    "    \\LARGE Дифференцирование\\\\\n"
+    "    \\large \\today \\\\[0.5em]\n"
+    "    \\large Лаврущев Иван Б05-431\\par\n"
+    "\\endgroup\n"
+    "\\tableofcontents\n";
 
 static const char* simplify_latex_beginning[] = {
     "\\section{Упростим крокодила}\n",
@@ -97,28 +98,32 @@ static int derivation_latex_beginning_size = sizeof(derivation_latex_beginning)/
 static int latex_ending_size               = sizeof(latex_ending)/sizeof(latex_ending[0]);
 static int phrases_size                    = sizeof(phrases)/sizeof(phrases[0]);
 
-#define WriteBinaryOperator(operation)\
-    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);\
-    fprintf(latex_file, operation);\
+#define WriteBinaryOperator(operation)                                   \
+    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file); \
+    fprintf(latex_file, operation);                                      \
     if(node->right) RecursiveWriteToLatex(tree, node->right, latex_file)
 
-#define WriteUnaryOperator(operation, open_bracket, close_bracket)\
-    fprintf(latex_file, operation);\
-    fprintf(latex_file, open_bracket);\
-    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file);\
+#define WriteUnaryOperator(operation, open_bracket, close_bracket)       \
+    fprintf(latex_file, operation);                                      \
+    fprintf(latex_file, open_bracket);                                   \
+    if(node->left)  RecursiveWriteToLatex(tree, node->left, latex_file); \
     fprintf(latex_file, close_bracket)
 
-#define WriteStepToLatex(node, start, ending)\
-    fprintf(latex_file, start);\
-    RecursiveWriteToLatex(tree, node, latex_file);\
-    fprintf(latex_file, ending);\
+#define WriteStepToLatex(node, start, ending)                            \
+    fprintf(latex_file, start);                                          \
+    RecursiveWriteToLatex(tree, node, latex_file);                       \
+    fprintf(latex_file, ending);                                         \
+
+#define LatexOutput()                                                    \
+    PrintPhrase(latex_file, phrases, phrases_size);                      \
+    WriteStepToLatex(node, "$$(", ")'");                                 \
+    WriteStepToLatex(diff_result, " = ", "$$\n");
 
 TYPE_OF_ERROR WriteToLatex         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node);
-TYPE_OF_ERROR RecursiveWriteToLatex(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node,
-                                    FILE* latex_file);
-TYPE_OF_ERROR PrintValue     (TreeNode<DifferentiatorValue>* node, FILE* latex_file);
-TYPE_OF_ERROR PrintPhrase    (FILE* latex_file, const char* phrase_array[], const size_t size);
-void          BeginLatexFile ();
-void          EndLatexFile   ();
+TYPE_OF_ERROR RecursiveWriteToLatex(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node, FILE* latex_file);
+TYPE_OF_ERROR PrintValue           (TreeNode<DifferentiatorValue>* node, FILE* latex_file               );
+TYPE_OF_ERROR PrintPhrase          (FILE* latex_file, const char* phrase_array[], const size_t size     );
+void          BeginLatexFile       ();
+void          EndLatexFile         ();
 
 #endif

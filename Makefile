@@ -6,7 +6,7 @@ B_SUBMODULES  = Color-printf/color_printf.cpp Stack/src/recalloc.cpp Stack/src/s
 
 BUILD_DIR     = ./build/
 SRC_DIR       = ./src/
-CFLAGS        = -I inc -I Custom-asserts -I Color-printf -I Binary-tree/inc -I Debug-macros
+CFLAGS        = -I inc -I Custom-asserts -I Color-printf -I Binary-tree/inc -I Debug-macros -I Buffer
 B_CFLAGS      = -I inc -I Custom-asserts -I Color-printf -I Binary-tree/inc -I Debug-macros -I Stack/inc
 
 TARGET        = Differentiator
@@ -32,7 +32,7 @@ all : $(addprefix $(SRC_DIR), $(SRC))
 run : $(addprefix $(SRC_DIR), $(SRC))
 	clear
 	@mkdir -p build
-	$(CXX) $(CFLAGS) $(DED_FLAGS) $^ $(SUBMODULE_SRC) -o $(addprefix $(BUILD_DIR), $(TARGET))
+	$(CXX) $(CFLAGS) $^ $(SUBMODULE_SRC) -o $(addprefix $(BUILD_DIR), $(TARGET))
 	@printf "$(GREEN_COLOR)$(TARGET) COMPILED$(DEFAULT_COLOR)\n"
 	$(addprefix $(BUILD_DIR), $(TARGET))
 
