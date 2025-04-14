@@ -34,6 +34,8 @@
 # build
 **/build
 **/Latex
+**/Dump-source
+**/Tree-dumps
 
 # venv
 .vscode
