@@ -6,7 +6,7 @@
 
 static const int ROOT_NODE = 0;
 
-TYPE_OF_ERROR DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value) {
+TypeOfError DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value) {
     TreeInit(tree, &root_value);
 
     return SUCCESS;
@@ -35,10 +35,10 @@ TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node) 
                    CopySubtree(node->left), CopySubtree(node->right));
 }
 
-TYPE_OF_ERROR   ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
+TypeOfError   ReplaceNodes(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before,
                            TreeNode<DifferentiatorValue>* node_after) {
-    check_expression(*node_before, POINTER_IS_NULL);
-    check_expression(node_after,   POINTER_IS_NULL);
+    warning(*node_before, POINTER_IS_NULL);
+    warning(node_after,   POINTER_IS_NULL);
 
     TreeNode<DifferentiatorValue>* new_node = NULL;
     if(node_after->parent){

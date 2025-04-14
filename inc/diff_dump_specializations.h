@@ -3,6 +3,7 @@
 
 #include "tree.h"
 #include "diff_definitions.h"
+#include "errors.h"
 
 #define _WriteOperationDescriptionToStream()                                                                                                          \
     fprintf(dot_file, "P%p [style = \"filled, rounded\", fillcolor=\"yellow:magenta\" gradientangle=270,"                                              \
@@ -21,9 +22,9 @@
            node, node, node->parent, node->value.data.double_value)                                                              \
 
 template <>
-inline TYPE_OF_ERROR ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, FILE* dot_file) {
-    check_expression(dot_file,  POINTER_IS_NULL);
-    check_expression(node,      POINTER_IS_NULL);
+inline TypeOfError ProcessNode<DifferentiatorValue>(TreeNode<DifferentiatorValue>* node, FILE* dot_file) {
+    warning(dot_file,  POINTER_IS_NULL);
+    warning(node,      POINTER_IS_NULL);
 
     switch(node->value.type) {
         case number   :

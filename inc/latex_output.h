@@ -1,6 +1,8 @@
 #ifndef LATEX_OUTPUT_H_
 #define LATEX_OUTPUT_H_
 
+#include "errors.h"
+
 static const char* latex_begining = ""
     "\\documentclass[12pt]{article}\n"
     "\\usepackage[utf8]{inputenc}\n"
@@ -119,10 +121,10 @@ static int phrases_size                    = sizeof(phrases)/sizeof(phrases[0]);
     WriteStepToLatex(node, "$$(", ")'");                                 \
     WriteStepToLatex(diff_result, " = ", "$$\n");
 
-TYPE_OF_ERROR WriteToLatex         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node);
-TYPE_OF_ERROR RecursiveWriteToLatex(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node, FILE* latex_file);
-TYPE_OF_ERROR PrintValue           (TreeNode<DifferentiatorValue>* node, FILE* latex_file               );
-TYPE_OF_ERROR PrintPhrase          (FILE* latex_file, const char* phrase_array[], const size_t size     );
+TypeOfError WriteToLatex         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node);
+TypeOfError RecursiveWriteToLatex(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>* node, FILE* latex_file);
+TypeOfError PrintValue           (TreeNode<DifferentiatorValue>* node, FILE* latex_file               );
+TypeOfError PrintPhrase          (FILE* latex_file, const char* phrase_array[], const size_t size     );
 void          BeginLatexFile       ();
 void          EndLatexFile         ();
 

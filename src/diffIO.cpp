@@ -198,7 +198,7 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
             *p = start;
             return GetVariable(s, p);
         default:
-            warning(false, PROGRAM_ERROR);
+            warning(false, NULL);
     }
 }
 

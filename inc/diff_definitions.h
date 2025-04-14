@@ -5,6 +5,7 @@
 #include <math.h>
 
 #include "tree.h"
+#include "errors.h"
 
 static const char*  operation_symbol[] = {"+", "-", "*", "/", "sqrt", "sin", "cos", "ln", "exp", "^"};
 static const char   variable_table  [] = {'x', 'y', 'z'}; //TODO change to template struct Buffer<...>
@@ -43,6 +44,6 @@ struct DifferentiatorValue{
 
 TreeNode<DifferentiatorValue>* CreateDiffNode(DifferentiatorValue diff_value,
                 TreeNode<DifferentiatorValue>* left, TreeNode<DifferentiatorValue>* right);
-TYPE_OF_ERROR DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value);
+TypeOfError DiffTreeInit(Tree<DifferentiatorValue>* tree, DifferentiatorValue root_value);
 
 #endif

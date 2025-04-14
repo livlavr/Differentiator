@@ -1,10 +1,12 @@
 #ifndef SIMPLIFIER_H_
 #define SIMPLIFIER_H_
 
+#include "errors.h"
+
 bool          IsEqual              (double first_value, double second_value, double eps);
-TYPE_OF_ERROR SimplifyTree         (Tree<DifferentiatorValue>* tree);
-TYPE_OF_ERROR ReplaceNodes         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before, TreeNode<DifferentiatorValue>* node_after);
-TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node, size_t* simplifications_number, FILE* latex_file);
+TypeOfError SimplifyTree         (Tree<DifferentiatorValue>* tree);
+TypeOfError ReplaceNodes         (Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node_before, TreeNode<DifferentiatorValue>* node_after);
+TypeOfError RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node, size_t* simplifications_number, FILE* latex_file);
 TreeNode<DifferentiatorValue>* CopySubtree(TreeNode<DifferentiatorValue>* node);
 
 #define ReplaceSubtree(side, new_node)\

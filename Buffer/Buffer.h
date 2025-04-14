@@ -11,9 +11,9 @@
 
 
 template <typename T>
-TYPE_OF_ERROR ReadFile(Buffer<T>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+TypeOfError ReadFile(Buffer<T>* buffer_struct, const char* filename) {
+    warning(buffer_struct, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     FILE* file = fopen(filename, "r");
     warning(file, POINTER_IS_NULL);
@@ -28,9 +28,9 @@ TYPE_OF_ERROR ReadFile(Buffer<T>* buffer_struct, const char* filename) {
     return SUCCESS;
 }
 
-TYPE_OF_ERROR GetSizeOfBuffer(size_t* size, const char* filename) {
-    check_expression(size, POINTER_IS_NULL);
-    check_expression(filename, POINTER_IS_NULL);
+TypeOfError GetSizeOfBuffer(size_t* size, const char* filename) {
+    warning(size, POINTER_IS_NULL);
+    warning(filename, POINTER_IS_NULL);
 
     struct stat buffer_information = {};
 
@@ -43,9 +43,9 @@ TYPE_OF_ERROR GetSizeOfBuffer(size_t* size, const char* filename) {
 }
 
 template <typename T>
-TYPE_OF_ERROR ScanFileToBuffer(Buffer<T>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+TypeOfError ScanFileToBuffer(Buffer<T>* buffer_struct, const char* filename) {
+    warning(buffer_struct, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     color_printf(RED_COLOR, BOLD, "Please specialize type for %s | FILE: %s | LINE: %d\n",\
                 __func__, __FILE__, __LINE__);
@@ -54,10 +54,10 @@ TYPE_OF_ERROR ScanFileToBuffer(Buffer<T>* buffer_struct, const char* filename) {
 }
 
 template <>
-TYPE_OF_ERROR ScanFileToBuffer<char>(Buffer<char>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct,      POINTER_IS_NULL);
-    check_expression(filename,           POINTER_IS_NULL);
-    check_expression(buffer_struct != 0, FILE_READ_ERROR);
+TypeOfError ScanFileToBuffer<char>(Buffer<char>* buffer_struct, const char* filename) {
+    warning(buffer_struct,      POINTER_IS_NULL);
+    warning(filename,           POINTER_IS_NULL);
+    warning(buffer_struct != 0, FILE_READ_ERROR);
 
     FILE* file = fopen(filename, "r");
     warning(file, FILE_OPEN_ERROR);
@@ -70,9 +70,9 @@ TYPE_OF_ERROR ScanFileToBuffer<char>(Buffer<char>* buffer_struct, const char* fi
 }
 
 template <typename T>
-TYPE_OF_ERROR GetLinePointersFromFile(Buffer<T>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+TypeOfError GetLinePointersFromFile(Buffer<T>* buffer_struct, const char* filename) {
+    warning(buffer_struct, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     color_printf(RED_COLOR, BOLD, "Please specialize type for %s | FILE: %s | LINE: %d\n",\
                 __func__, __FILE__, __LINE__);
@@ -81,9 +81,9 @@ TYPE_OF_ERROR GetLinePointersFromFile(Buffer<T>* buffer_struct, const char* file
 }
 
 template <>
-TYPE_OF_ERROR GetLinePointersFromFile<char*>(Buffer<char*>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+TypeOfError GetLinePointersFromFile<char*>(Buffer<char*>* buffer_struct, const char* filename) {
+    warning(buffer_struct, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     Buffer<char> text = {};
     ReadFile<char>(&text, filename);
@@ -108,8 +108,8 @@ TYPE_OF_ERROR GetLinePointersFromFile<char*>(Buffer<char*>* buffer_struct, const
 
 template <typename T>
 size_t CountLines(Buffer<T>* buffer_struct, const char* filename) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+    warning(buffer_struct, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     color_printf(RED_COLOR, BOLD, "Please specialize type for %s | FILE: %s | LINE: %d\n",\
                 __func__, __FILE__, __LINE__);
@@ -119,8 +119,8 @@ size_t CountLines(Buffer<T>* buffer_struct, const char* filename) {
 
 template <>
 size_t CountLines<char>(Buffer<char>* text, const char* filename) {
-    check_expression(text, POINTER_IS_NULL);
-    check_expression(filename,      POINTER_IS_NULL);
+    warning(text, POINTER_IS_NULL);
+    warning(filename,      POINTER_IS_NULL);
 
     size_t lines_number = 0;
     size_t index        = 1;
@@ -134,8 +134,8 @@ size_t CountLines<char>(Buffer<char>* text, const char* filename) {
 }
 
 template <typename T>
-TYPE_OF_ERROR BufferDtor(Buffer<T>* buffer_struct) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
+TypeOfError BufferDtor(Buffer<T>* buffer_struct) {
+    warning(buffer_struct, POINTER_IS_NULL);
 
     color_printf(RED_COLOR, BOLD, "Please specialize type for %s | FILE: %s | LINE: %d\n",\
                 __func__, __FILE__, __LINE__);
@@ -144,8 +144,8 @@ TYPE_OF_ERROR BufferDtor(Buffer<T>* buffer_struct) {
 }
 
 template <> //TODO move in BufferSpecializations.h
-TYPE_OF_ERROR BufferDtor<char>(Buffer<char>* buffer_struct) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
+TypeOfError BufferDtor<char>(Buffer<char>* buffer_struct) {
+    warning(buffer_struct, POINTER_IS_NULL);
 
     buffer_struct->size = 0;
     free(buffer_struct->data);
@@ -155,8 +155,8 @@ TYPE_OF_ERROR BufferDtor<char>(Buffer<char>* buffer_struct) {
 }
 
 template <>
-TYPE_OF_ERROR BufferDtor<char*>(Buffer<char*>* buffer_struct) {
-    check_expression(buffer_struct, POINTER_IS_NULL);
+TypeOfError BufferDtor<char*>(Buffer<char*>* buffer_struct) {
+    warning(buffer_struct, POINTER_IS_NULL);
 
     buffer_struct->size = 0;
     free(buffer_struct->data);

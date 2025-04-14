@@ -7,14 +7,14 @@ struct Buffer {
     size_t size = 0;
 };
 
-template <typename T> TYPE_OF_ERROR ReadFile              (Buffer<T>* buffer_struct, const char* filename);
-template <typename T> TYPE_OF_ERROR ScanFileToBuffer      (Buffer<T>* buffer_struct, const char* filename);
-template <          > TYPE_OF_ERROR ScanFileToBuffer<char>(Buffer<char>* buffer_struct, const char* filename);
-TYPE_OF_ERROR                       GetSizeOfBuffer       (size_t* size, const char* filename);
+template <typename T> TypeOfError ReadFile              (Buffer<T>* buffer_struct, const char* filename);
+template <typename T> TypeOfError ScanFileToBuffer      (Buffer<T>* buffer_struct, const char* filename);
+template <          > TypeOfError ScanFileToBuffer<char>(Buffer<char>* buffer_struct, const char* filename);
+TypeOfError                       GetSizeOfBuffer       (size_t* size, const char* filename);
 template <typename T> size_t        CountLines            (Buffer<T>* buffer_struct, const char* filename);
 template <          > size_t        CountLines<char>      (Buffer<char>* text, const char* filename);
-template <typename T> TYPE_OF_ERROR BufferDtor            (Buffer<T>* buffer_struct);
-template <          > TYPE_OF_ERROR BufferDtor<char>      (Buffer<char>* buffer_struct);
-template <          > TYPE_OF_ERROR BufferDtor<char*>     (Buffer<char*>* buffer_struct);
+template <typename T> TypeOfError BufferDtor            (Buffer<T>* buffer_struct);
+template <          > TypeOfError BufferDtor<char>      (Buffer<char>* buffer_struct);
+template <          > TypeOfError BufferDtor<char*>     (Buffer<char*>* buffer_struct);
 
 #endif

@@ -10,7 +10,7 @@
 #include "diff.h"
 #include "tree.h"
 
-TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
+TypeOfError SimplifyTree(Tree<DifferentiatorValue>* tree) {
     size_t simplifications_number = 0;
 
     FILE* latex_file = fopen("Latex/diff.tex", "a");
@@ -35,9 +35,9 @@ TYPE_OF_ERROR SimplifyTree(Tree<DifferentiatorValue>* tree) {
     return SUCCESS;
 }
 
-TYPE_OF_ERROR RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node,
+TypeOfError RecursiveSimplifyTree(Tree<DifferentiatorValue>* tree, TreeNode<DifferentiatorValue>** node,
                                     size_t* simplifications_number, FILE* latex_file) {
-    check_expression(simplifications_number, POINTER_IS_NULL);
+    warning(simplifications_number, POINTER_IS_NULL);
     if(!(*node)) return SUCCESS;
 
     RecursiveSimplifyTree(tree, &(*node)->left,  simplifications_number, latex_file);

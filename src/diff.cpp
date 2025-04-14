@@ -8,8 +8,8 @@
 #include "diff.h"
 #include "tree.h"
 
-TYPE_OF_ERROR DerivateTree(Tree<DifferentiatorValue>* tree) {
-    check_expression(tree, POINTER_IS_NULL);
+TypeOfError DerivateTree(Tree<DifferentiatorValue>* tree) {
+    warning(tree, POINTER_IS_NULL);
 
     FILE* latex_file = fopen("Latex/diff.tex", "a");
     PrintPhrase(latex_file, derivation_latex_beginning, derivation_latex_beginning_size);
