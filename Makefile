@@ -25,15 +25,11 @@ vpath %.cpp $(SRC_DIR)
 
 all : $(addprefix $(SRC_DIR), $(SRC))
 	clear
-	@mkdir -p build
+	@mkdir -p build Latex
 	$(CXX) $(CFLAGS) $^ $(SUBMODULE_SRC) -o $(addprefix $(BUILD_DIR), $(TARGET))
 	@printf "$(GREEN_COLOR)$(TARGET) COMPILED$(DEFAULT_COLOR)\n"
 
-run : $(addprefix $(SRC_DIR), $(SRC))
-	clear
-	@mkdir -p build
-	$(CXX) $(CFLAGS) $^ $(SUBMODULE_SRC) -o $(addprefix $(BUILD_DIR), $(TARGET))
-	@printf "$(GREEN_COLOR)$(TARGET) COMPILED$(DEFAULT_COLOR)\n"
+run : all
 	$(addprefix $(BUILD_DIR), $(TARGET))
 
 clean :
