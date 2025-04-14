@@ -9,6 +9,7 @@
 #include "color_printf.h"
 #include "BufferDefinitions.h"
 
+//TODO bufferCtor
 
 template <typename T>
 TypeOfError ReadFile(Buffer<T>* buffer_struct, const char* filename) {
@@ -16,7 +17,7 @@ TypeOfError ReadFile(Buffer<T>* buffer_struct, const char* filename) {
     warning(filename,      POINTER_IS_NULL);
 
     FILE* file = fopen(filename, "r");
-    warning(file, POINTER_IS_NULL);
+    customAssert(file, POINTER_IS_NULL);
 
     GetSizeOfBuffer(&(buffer_struct->size), filename);
 
