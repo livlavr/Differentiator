@@ -11,6 +11,7 @@
 
 void BeginLatexFile() {
     FILE* latex_file = fopen("Latex/diff.tex", "w");
+    customAssert(latex_file, FILE_OPEN_ERROR);
     fprintf(latex_file, latex_begining);
     fclose(latex_file);
 }

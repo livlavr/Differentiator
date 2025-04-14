@@ -18,7 +18,7 @@ int main() {
     DiffTreeInit(&tree, {});
     BeginLatexFile();
     Buffer<char> equation = {};
-    ReadFile(&equation, "Latex-source/DiffSource.txt");
+    ReadFile(&equation, "LatexSource/DiffSource.txt");
     ReplaceNodes(&tree, &(tree.root), GetEquation(equation.data, &p));
     TreeDump(&tree);
     SimplifyTree(&tree);

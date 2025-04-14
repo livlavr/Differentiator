@@ -11,22 +11,14 @@
 #include "debug_macros.h"
 
 TreeNode<DifferentiatorValue>* GetEquation(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* val = GetPlusMinus(s, p);
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     if(s[*p] != '\0' && s[*p] != '\n')
         SyntaxError(__LINE__);
     return val;
 }
 
 TreeNode<DifferentiatorValue>* GetPlusMinus(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* val1   = GetMulDiv(s, p);
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
     TreeNode<DifferentiatorValue>* val2   = NULL;
 
@@ -34,8 +26,6 @@ TreeNode<DifferentiatorValue>* GetPlusMinus(const char* s, size_t* p) {
         int op = s[*p];
         (*p)++;
         val2 = GetPlusMinus(s, p);
-        $DEBUG("%s", __func__);
-        $DEBUG("%c", s[*p]);
         if(op == '+') result = Add(val1, val2);
         else          result = Sub(val1, val2);
     }
@@ -44,11 +34,7 @@ TreeNode<DifferentiatorValue>* GetPlusMinus(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetMulDiv(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* val1   = GetPow(s, p);
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
     TreeNode<DifferentiatorValue>* val2   = NULL;
 
@@ -56,8 +42,6 @@ TreeNode<DifferentiatorValue>* GetMulDiv(const char* s, size_t* p) {
         int op = s[*p];
         (*p)++;
         val2  = GetMulDiv(s, p);
-        $DEBUG("%s", __func__);
-        $DEBUG("%c", s[*p]);
         if(op == '*') result = Mul(val1, val2);
         else          result = Div(val1, val2);
     }
@@ -66,19 +50,13 @@ TreeNode<DifferentiatorValue>* GetMulDiv(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetPow(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* val1   = GetBracket(s, p);
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     TreeNode<DifferentiatorValue>* result = val1;
     TreeNode<DifferentiatorValue>* val2   = NULL;
 
     while (s[*p] == '^') {
         (*p)++;
         val2   = GetPow(s, p);
-        $DEBUG("%s", __func__);
-        $DEBUG("%c", s[*p]);
         result = Pow(val1, val2);
     }
     SkipSpaces(s, p);
@@ -86,8 +64,6 @@ TreeNode<DifferentiatorValue>* GetPow(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetBracket(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     SkipSpaces(s, p);
     int sign = 1;
     if(s[*p] == '-') {
@@ -98,8 +74,6 @@ TreeNode<DifferentiatorValue>* GetBracket(const char* s, size_t* p) {
         (*p)++;
         SkipSpaces(s, p);
         TreeNode<DifferentiatorValue>* val = GetPlusMinus(s, p);
-        $DEBUG("%s", __func__);
-        $DEBUG("%c", s[*p]);
         if(s[*p] != ')')
             SyntaxError(__LINE__);
         (*p)++;
@@ -115,8 +89,6 @@ TreeNode<DifferentiatorValue>* GetBracket(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     size_t start = *p;
     double amount = 0;
     int    sign   = 1;
@@ -131,8 +103,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
     switch(op) {
         case SQRT:
             val = GetPlusMinus(s, p);
-            $DEBUG("%s", __func__);
-            $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
@@ -144,8 +114,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
 
         case SIN:
             val = GetPlusMinus(s, p);
-            $DEBUG("%s", __func__);
-            $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
@@ -157,8 +125,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
 
         case COS:
             val = GetPlusMinus(s, p);
-            $DEBUG("%s", __func__);
-            $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
@@ -170,8 +136,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
 
         case LN:
             val = GetPlusMinus(s, p);
-            $DEBUG("%s", __func__);
-            $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
@@ -183,8 +147,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
 
         case EXP:
             val = GetPlusMinus(s, p);
-            $DEBUG("%s", __func__);
-            $DEBUG("%c", s[*p]);
             if(s[*p] != ')')
                 SyntaxError(__LINE__);
             (*p)++;
@@ -203,8 +165,6 @@ TreeNode<DifferentiatorValue>* GetFunction(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetVariable(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     size_t number_of_var = sizeof(variable_table);
     int    sign   = 1;
     if(s[*p] == '-') {
@@ -215,7 +175,6 @@ TreeNode<DifferentiatorValue>* GetVariable(const char* s, size_t* p) {
         if(s[*p] == variable_table[variable_number]) {
             (*p)++;
             SkipSpaces(s, p);
-            $DEBUG("%d", variable_number);
             if(sign == -1) {
                 return Mul(Num(-1), Var(variable_number));
             }
@@ -227,8 +186,6 @@ TreeNode<DifferentiatorValue>* GetVariable(const char* s, size_t* p) {
 }
 
 TreeNode<DifferentiatorValue>* GetNumber(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     SkipSpaces(s, p);
     double amount = 0;
     size_t start  = *p;
@@ -249,8 +206,6 @@ TreeNode<DifferentiatorValue>* GetNumber(const char* s, size_t* p) {
 }
 
 Operations ScanOperation(const char* s, size_t* p) {
-    $DEBUG("%s", __func__);
-    $DEBUG("%c", s[*p]);
     SkipSpaces(s, p);
     char       operation[6] = "";
     size_t     op_index     = 0;
