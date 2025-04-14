@@ -33,6 +33,7 @@
 
 # build
 **/build
+**/Latex
 
 # venv
 .vscode
